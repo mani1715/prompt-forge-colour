@@ -292,35 +292,48 @@ const AboutManager = () => {
 
       {/* Tabs */}
       <div style={{ 
-        borderBottom: '2px solid #E5E7EB', 
-        marginBottom: '32px',
-        overflowX: 'auto',
-        WebkitOverflowScrolling: 'touch'
+        background: 'white',
+        borderRadius: '12px 12px 0 0',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+        overflow: 'hidden',
+        marginBottom: '0'
       }}>
         <div style={{ 
           display: 'flex', 
-          gap: '8px',
-          minWidth: 'max-content'
+          gap: '0',
+          overflowX: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          borderBottom: '2px solid #E5E7EB'
         }}>
           {['hero', 'story', 'values', 'techstack', 'numbers', 'founder', 'cta'].map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               style={{
-                padding: '12px 20px',
-                background: activeTab === tab ? '#F9FAFB' : 'none',
+                padding: '16px 24px',
+                background: activeTab === tab ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : 'white',
                 border: 'none',
-                borderBottom: activeTab === tab ? '3px solid #7C5CFF' : '3px solid transparent',
-                color: activeTab === tab ? '#7C5CFF' : '#6B7280',
+                borderBottom: activeTab === tab ? 'none' : '2px solid transparent',
+                color: activeTab === tab ? 'white' : '#6B7280',
                 fontWeight: activeTab === tab ? '600' : '500',
                 cursor: 'pointer',
                 textTransform: 'capitalize',
-                fontSize: '14px',
-                transition: 'all 0.2s',
-                borderRadius: '8px 8px 0 0',
-                whiteSpace: 'nowrap'
+                fontSize: '15px',
+                transition: 'all 0.3s',
+                whiteSpace: 'nowrap',
+                position: 'relative'
               }}
               data-testid={`tab-${tab}`}
+              onMouseEnter={(e) => {
+                if (activeTab !== tab) {
+                  e.currentTarget.style.background = '#F9FAFB';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (activeTab !== tab) {
+                  e.currentTarget.style.background = 'white';
+                }
+              }}
             >
               {tab === 'techstack' ? 'Tech Stack' : tab === 'cta' ? 'CTA' : tab}
             </button>
