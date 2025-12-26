@@ -1,40 +1,52 @@
 import axios from 'axios';
 
-// Ensure the backend URL always uses relative paths to avoid mixed content issues
+/**
+ * API Configuration for Production Deployment
+ * 
+ * LOCAL DEVELOPMENT (Kubernetes/Docker):
+ *   REACT_APP_BACKEND_URL=/api
+ *   Uses relative path, proxied by Kubernetes ingress
+ * 
+ * PRODUCTION (Vercel + Render):
+ *   REACT_APP_BACKEND_URL=https://your-backend-name.onrender.com
+ *   Uses absolute URL to Render backend (NOTE: Do NOT include /api suffix)
+ */
+
 const getApiBaseUrl = () => {
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   
-  console.log('[API Config v2.0] REACT_APP_BACKEND_URL:', backendUrl);
-  console.log('[API Config v2.0] Current protocol:', window.location.protocol);
-  console.log('[API Config v2.0] Current host:', window.location.host);
+  console.log('[API Config] Environment:', process.env.NODE_ENV);
+  console.log('[API Config] REACT_APP_BACKEND_URL:', backendUrl);
+  console.log('[API Config] Current origin:', window.location.origin);
   
-  // If backendUrl is a relative path (starts with /), just return it
-  if (backendUrl && backendUrl.startsWith('/')) {
-    console.log('[API Config v2.0] ✅ Using relative URL:', backendUrl);
-    return backendUrl;
-  }
-  
-  // If backendUrl is empty, construct relative URL
+  // Case 1: No environment variable set - use default relative path
   if (!backendUrl || backendUrl.trim() === '') {
-    console.log('[API Config v2.0] ✅ Using default relative URL: /api');
+    console.log('[API Config] ✅ Using default relative path: /api');
     return '/api';
   }
   
-  // If backendUrl is provided and absolute, ensure it uses HTTPS in production
+  // Case 2: Relative path (local development with K8s/Docker)
+  if (backendUrl.startsWith('/')) {
+    console.log('[API Config] ✅ Using relative path:', backendUrl);
+    return backendUrl;
+  }
+  
+  // Case 3: Absolute URL (production - Vercel + Render)
   let finalUrl = backendUrl;
   
-  // Force HTTPS if we're on an HTTPS page
+  // Ensure HTTPS in production
   if (window.location.protocol === 'https:' && finalUrl.startsWith('http://')) {
     finalUrl = finalUrl.replace('http://', 'https://');
-    console.log('[API Config v2.0] ⚠️ Forced HTTPS upgrade:', finalUrl);
+    console.log('[API Config] ⚠️ Upgraded to HTTPS:', finalUrl);
   }
   
-  // Ensure /api suffix
+  // Add /api suffix if not present
   if (!finalUrl.endsWith('/api')) {
     finalUrl = `${finalUrl}/api`;
+    console.log('[API Config] 📝 Added /api suffix:', finalUrl);
   }
   
-  console.log('[API Config v2.0] ✅ Final API Base URL:', finalUrl);
+  console.log('[API Config] ✅ Final API Base URL:', finalUrl);
   return finalUrl;
 };
 
