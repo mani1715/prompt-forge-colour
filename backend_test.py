@@ -105,7 +105,7 @@ class MSPNAdminAPITester:
 
     def test_dashboard_stats(self):
         """Test dashboard statistics"""
-        return self.run_test("Dashboard Stats", "GET", "/analytics/dashboard-stats", 200)
+        return self.run_test("Dashboard Stats", "GET", "/analytics/summary", 200)
 
     def test_about_management(self):
         """Test About page CRUD operations"""
