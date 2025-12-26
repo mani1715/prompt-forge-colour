@@ -4,20 +4,10 @@ import { ArrowRight, Code, ShoppingCart, Layers, Palette, Star, TrendingUp, User
 import { agencyInfo, services, stats, testimonials } from '../data/mock';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
-import axios from 'axios';
+import api from '../services/api';
 import projectService from '../services/projectService';
 import { getPublicTestimonials } from '../services/testimonialService';
 import { trackPageView } from '../services/analytics';
-
-const getAPIURL = () => {
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
-  if (!backendUrl || backendUrl.trim() === '') {
-    return '';  // Use relative path, API calls already have /api prefix
-  }
-  return backendUrl;
-};
-
-const API_URL = getAPIURL();
 
 const Home = () => {
   const [featuredProjects, setFeaturedProjects] = useState([]);
