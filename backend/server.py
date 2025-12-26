@@ -69,7 +69,22 @@ app = FastAPI(
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
-# Health check endpoint
+# =============================================================================
+# ROOT HEALTH CHECK ENDPOINT (Required by Render)
+# =============================================================================
+# Render uses this endpoint to verify that the service is running correctly
+# This must return a 200 OK status for the health check to pass
+# =============================================================================
+@app.get("/")
+async def health_check():
+    """Root health check endpoint for Render deployment monitoring"""
+    return {
+        "status": "healthy",
+        "service": "MSPN DEV API",
+        "message": "Backend is running successfully"
+    }
+
+# Health check endpoint under /api prefix (for backward compatibility)
 @api_router.get("/")
 async def root():
     return {"message": "MSPN DEV API is running", "status": "healthy"}
