@@ -38,12 +38,40 @@ const ContactPageManager = () => {
       setSaving(true);
       // Remove fields that shouldn't be sent to backend
       const { created_at, created_by, updated_at, updated_by, _id, ...cleanContent } = content;
-      await contactPageService.updateContactPage(cleanContent);
-      toast.success('Contact page updated successfully!');
+      
+      const response = await contactPageService.updateContactPage(cleanContent);
+      
+      // Update local state with response from server
+      setContent(response);
+      
+      toast.success('Contact page updated successfully! Changes are now live on the website.');
     } catch (error) {
       console.error('Full error:', error);
       console.error('Error response:', error.response?.data);
-      toast.error('Failed to update contact page: ' + (error.response?.data?.detail || error.message));
+      
+      // Properly format error message
+      let errorMessage = 'Failed to update contact page';
+      
+      if (error.response?.data?.detail) {
+        // If detail is an array of validation errors
+        if (Array.isArray(error.response.data.detail)) {
+          errorMessage = error.response.data.detail.map(err => 
+            `${err.loc?.join(' → ') || 'Field'}: ${err.msg}`
+          ).join(', ');
+        } 
+        // If detail is an object
+        else if (typeof error.response.data.detail === 'object') {
+          errorMessage = JSON.stringify(error.response.data.detail, null, 2);
+        } 
+        // If detail is a string
+        else {
+          errorMessage = String(error.response.data.detail);
+        }
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      toast.error(errorMessage, { duration: 5000 });
     } finally {
       setSaving(false);
     }
