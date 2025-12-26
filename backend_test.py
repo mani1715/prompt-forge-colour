@@ -261,8 +261,8 @@ class MSPNAdminAPITester:
         """Test Contacts management"""
         print("\n📧 Testing Contacts Management...")
         
-        # Get all contacts
-        self.run_test("Get All Contacts", "GET", "/contacts", 200)
+        # Get all contacts (admin)
+        self.run_test("Get All Contacts", "GET", "/contacts/admin/all", 200)
 
     def test_skills_management(self):
         """Test Skills CRUD operations"""
