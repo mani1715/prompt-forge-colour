@@ -1,17 +1,45 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 from dotenv import load_dotenv
 import os
+import logging
 from pathlib import Path
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-db_name = os.environ['DB_NAME']
+# MongoDB connection with production-ready configuration
+# MONGODB_URI is the standard environment variable name used by MongoDB Atlas and Render
+mongodb_uri = os.environ.get('MONGODB_URI')
+db_name = os.environ.get('DB_NAME', 'mspn_dev_db')
 
-client = AsyncIOMotorClient(mongo_url)
-db = client[db_name]
+# Validation: Ensure MongoDB URI is provided
+if not mongodb_uri:
+    logger.error("❌ MONGODB_URI environment variable is not set!")
+    raise ValueError("MONGODB_URI environment variable is required. Please set it in your .env file or environment.")
+
+# Log connection attempt (without exposing credentials)
+if mongodb_uri.startswith('mongodb+srv://'):
+    logger.info("🔗 Connecting to MongoDB Atlas (production)...")
+elif mongodb_uri.startswith('mongodb://localhost'):
+    logger.info("🔗 Connecting to local MongoDB (development)...")
+else:
+    logger.info("🔗 Connecting to MongoDB...")
+
+try:
+    # Create MongoDB client with connection timeout
+    client = AsyncIOMotorClient(
+        mongodb_uri,
+        serverSelectionTimeoutMS=5000,  # 5 second timeout
+        connectTimeoutMS=10000,  # 10 second connection timeout
+    )
+    db = client[db_name]
+    logger.info(f"✅ MongoDB client initialized for database: {db_name}")
+except Exception as e:
+    logger.error(f"❌ Failed to initialize MongoDB client: {str(e)}")
+    raise
 
 # Collections
 users_collection = db['users']
