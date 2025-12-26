@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { toast } from 'sonner';
 import { Lock, Mail, LogIn, Briefcase } from 'lucide-react';
-
-const API_URL = process.env.REACT_APP_BACKEND_URL || '/api';
 
 export default function ClientLogin() {
   const navigate = useNavigate();
