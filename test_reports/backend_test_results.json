@@ -1,0 +1,30 @@
+{
+  "timestamp": "2025-12-26T13:43:19.462902",
+  "total_tests": 2,
+  "passed_tests": 1,
+  "failed_tests": 1,
+  "success_rate": 50.0,
+  "failed_test_details": [
+    {
+      "test": "Admin Login",
+      "error": "Expected 200, got 422",
+      "response": {
+        "detail": [
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "email"
+            ],
+            "msg": "Field required",
+            "input": {
+              "username": "admin",
+              "password": "admin123"
+            },
+            "url": "https://errors.pydantic.dev/2.12/v/missing"
+          }
+        ]
+      }
+    }
+  ]
+}
