@@ -447,17 +447,17 @@ export default function ClientProjectsManager() {
                     }}
                     data-testid={`project-item-${project.id}`}
                   >
-                    <div className="flex items-start justify-between gap-2 mb-2">
+                    <div className="flex items-center justify-between gap-2 mb-3">
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-medium text-gray-900 truncate">{project.name}</h3>
-                        <p className="text-xs text-gray-600 truncate">{getClientName(project.client_id)}</p>
+                        <h3 className="font-medium text-gray-900 truncate leading-tight">{project.name}</h3>
+                        <p className="text-xs text-gray-600 truncate mt-1.5">{getClientName(project.client_id)}</p>
                       </div>
-                      <Badge className={`${getStatusColor(project.status)} text-xs shrink-0`}>
+                      <Badge className={`${getStatusColor(project.status)} text-xs shrink-0 self-start`}>
                         {getStatusLabel(project.status)}
                       </Badge>
                     </div>
-                    <div className="mt-2">
-                      <div className="flex items-center justify-between text-xs mb-1">
+                    <div className="mt-3">
+                      <div className="flex items-center justify-between text-xs mb-1.5">
                         <span className="text-gray-600">Progress</span>
                         <span className="font-medium">{project.progress}%</span>
                       </div>
