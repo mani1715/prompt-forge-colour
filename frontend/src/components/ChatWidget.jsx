@@ -12,10 +12,12 @@ const ChatWidget = () => {
   return (
     <button
       onClick={handleChatClick}
-      className="fixed bottom-6 right-6 bg-gradient-to-r from-purple-600 to-blue-600 text-white p-3.5 rounded-full shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 z-50 group chat-widget-button"
+      className="fixed bg-gradient-to-r from-purple-600 to-blue-600 text-white p-3.5 rounded-full shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 z-50 group chat-widget-button"
       aria-label="Open Chat"
       data-testid="floating-chat-button"
       style={{
+        bottom: '100px',
+        right: '24px',
         width: '56px',
         height: '56px',
         display: 'flex',
