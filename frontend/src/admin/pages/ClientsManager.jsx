@@ -224,7 +224,7 @@ export default function ClientsManager() {
 
       {/* Create/Edit Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="sm:max-w-[500px]" data-testid="client-dialog">
+        <DialogContent className="sm:max-w-[500px] max-h-[90vh] flex flex-col" data-testid="client-dialog">
           <DialogHeader>
             <DialogTitle>
               {editingClient ? 'Edit Client' : 'Create New Client'}
@@ -236,8 +236,8 @@ export default function ClientsManager() {
               }
             </DialogDescription>
           </DialogHeader>
-          <form onSubmit={handleSubmit}>
-            <div className="space-y-4 py-4">
+          <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-hidden">
+            <div className="space-y-4 py-4 overflow-y-auto pr-2">
               <div className="space-y-2">
                 <Label htmlFor="name">Name *</Label>
                 <Input
