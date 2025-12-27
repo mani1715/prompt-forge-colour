@@ -42,7 +42,7 @@ async def get_client(client_id: str, admin = Depends(get_current_admin)):
         email=client_doc['email'],
         company=client_doc.get('company'),
         phone=client_doc.get('phone'),
-        is_active=client_doc['is_active'],
+        is_active=client_doc.get('is_active', True),  # Default to True if not set
         created_at=client_doc['created_at'] if isinstance(client_doc['created_at'], str) else client_doc['created_at'].isoformat()
     )
 
