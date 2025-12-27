@@ -236,3 +236,96 @@ async def download_project_file(
         filename=file_info['filename'],
         media_type='application/octet-stream'
     )
+
+# ============================================================================
+# CHAT ENDPOINTS (Client)
+# ============================================================================
+
+@router.post("/{project_id}/chat", response_model=ChatMessageResponse)
+async def send_chat_message(project_id: str, message_data: ChatMessageCreate, client = Depends(get_current_client)):
+    """Send a chat message to admin (Client)"""
+    project_doc = await client_projects_collection.find_one({
+        "id": project_id,
+        "client_id": client["id"]
+    })
+    
+    if not project_doc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Project not found or not assigned to you"
+        )
+    
+    chat_message = ChatMessage(
+        sender_id=client["id"],
+        sender_name=client.get("name", "Client"),
+        sender_type="client",
+        message=message_data.message,
+        read=False
+    )
+    
+    message_dict = chat_message.model_dump()
+    message_dict['created_at'] = message_dict['created_at'].isoformat()
+    
+    # Add activity log
+    activity = ProjectActivity(
+        action="chat_message",
+        description=f"{client.get('name', 'Client')} sent a chat message",
+        user_id=client["id"],
+        user_name=client.get("name", "Client")
+    )
+    activity_dict = activity.model_dump()
+    activity_dict['timestamp'] = activity_dict['timestamp'].isoformat()
+    
+    await client_projects_collection.update_one(
+        {"id": project_id},
+        {
+            "$push": {
+                "chat_messages": message_dict,
+                "activity_log": activity_dict
+            },
+            "$set": {"last_activity_at": datetime.utcnow().isoformat()}
+        }
+    )
+    
+    return ChatMessageResponse(**message_dict)
+
+@router.get("/{project_id}/chat", response_model=List[ChatMessageResponse])
+async def get_chat_messages(project_id: str, client = Depends(get_current_client)):
+    """Get all chat messages for a project (Client)"""
+    project_doc = await client_projects_collection.find_one({
+        "id": project_id,
+        "client_id": client["id"]
+    })
+    
+    if not project_doc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Project not found or not assigned to you"
+        )
+    
+    # Mark client messages as read
+    chat_messages = project_doc.get('chat_messages', [])
+    updated = False
+    for msg in chat_messages:
+        if msg['sender_type'] == 'admin' and not msg.get('read', False):
+            msg['read'] = True
+            updated = True
+    
+    if updated:
+        await client_projects_collection.update_one(
+            {"id": project_id},
+            {"$set": {"chat_messages": chat_messages}}
+        )
+    
+    return [
+        ChatMessageResponse(
+            id=cm['id'],
+            sender_id=cm['sender_id'],
+            sender_name=cm['sender_name'],
+            sender_type=cm['sender_type'],
+            message=cm['message'],
+            read=cm.get('read', False),
+            created_at=cm['created_at'] if isinstance(cm['created_at'], str) else cm['created_at'].isoformat()
+        ) for cm in chat_messages
+    ]
+
