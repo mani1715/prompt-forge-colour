@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../co
 import { Badge } from '../components/ui/badge';
 import { Progress } from '../components/ui/progress';
 import { toast } from 'sonner';
-import { LogOut, Download, Calendar, FileText, Briefcase, TrendingUp, Clock, CheckCircle2, AlertCircle, Sparkles, Users, Building2 } from 'lucide-react';
+import { LogOut, Download, Calendar, FileText, Briefcase, TrendingUp, Clock, CheckCircle2, AlertCircle, Sparkles, Users, Building2, Star, MessageSquare, Send } from 'lucide-react';
 
 export default function ClientDashboard() {
   const navigate = useNavigate();
