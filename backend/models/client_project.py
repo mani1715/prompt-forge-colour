@@ -100,6 +100,7 @@ class ClientProject(BaseModel):
     tasks: List[ProjectTask] = []
     files: List[ProjectFile] = []
     comments: List[ProjectComment] = []
+    chat_messages: List['ChatMessage'] = []  # New chat feature
     activity_log: List[ProjectActivity] = []
     team_members: List[TeamMember] = []
     budget: Optional[Budget] = None
