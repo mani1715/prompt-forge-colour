@@ -79,7 +79,15 @@ export default function ClientDashboard() {
         }
       });
       setProjects(response.data);
-      if (response.data.length > 0) {
+      
+      // If we have a selected project, update it with latest data
+      if (selectedProject) {
+        const updatedSelectedProject = response.data.find(p => p.id === selectedProject.id);
+        if (updatedSelectedProject) {
+          setSelectedProject(updatedSelectedProject);
+        }
+      } else if (response.data.length > 0) {
+        // No project selected yet, select the first one
         setSelectedProject(response.data[0]);
       }
     } catch (error) {
