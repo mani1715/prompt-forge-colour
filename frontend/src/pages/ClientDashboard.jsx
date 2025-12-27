@@ -41,6 +41,13 @@ export default function ClientDashboard() {
 
     setClient(JSON.parse(clientData));
     fetchProjects(token);
+    
+    // Auto-refresh projects every 30 seconds
+    const refreshInterval = setInterval(() => {
+      fetchProjects(token);
+    }, 30000); // 30 seconds
+    
+    return () => clearInterval(refreshInterval);
   }, [navigate]);
 
   useEffect(() => {
