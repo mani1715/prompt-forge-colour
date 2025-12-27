@@ -3,9 +3,10 @@ from typing import List
 from datetime import datetime
 import uuid
 
-from database import testimonials_collection
+from database import testimonials_collection, clients_collection
 from schemas.testimonial import TestimonialCreate, TestimonialSubmit, TestimonialUpdate, TestimonialResponse
 from auth.admin_auth import get_current_admin
+from auth.client_auth import get_current_client
 
 router = APIRouter()
 
