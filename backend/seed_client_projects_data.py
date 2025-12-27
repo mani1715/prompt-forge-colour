@@ -17,26 +17,70 @@ DB_NAME = os.getenv('DB_NAME', 'mspn_dev_db')
 
 async def seed_client_projects():
     """Create sample client projects with complete features"""
+    from auth.password import hash_password
     
     client = AsyncIOMotorClient(MONGODB_URI)
     db = client[DB_NAME]
     
     print("🚀 Starting to seed client projects data...")
     
-    # Check if we have clients and admin
-    clients = await db.clients.find({'is_active': True}).to_list(length=10)
+    # Check if we have admin
     admin = await db.admins.find_one({'role': 'super_admin'})
-    
-    if not clients:
-        print("⚠️  No active clients found. Please create a client first.")
-        return
     
     if not admin:
         print("⚠️  No admin found. Please create an admin first.")
         return
     
-    print(f"✅ Found {len(clients)} clients")
     print(f"✅ Found admin: {admin['username']}")
+    
+    # Create sample clients if they don't exist
+    clients = await db.clients.find({'is_active': True}).to_list(length=10)
+    
+    if not clients:
+        print("📝 Creating sample clients...")
+        sample_clients = [
+            {
+                'id': str(uuid.uuid4()),
+                'name': 'John Smith',
+                'email': 'john.smith@example.com',
+                'company': 'TechStart Inc.',
+                'phone': '+1-555-0101',
+                'password_hash': hash_password('client123'),
+                'is_active': True,
+                'created_at': datetime.now().isoformat(),
+                'created_by': admin['id']
+            },
+            {
+                'id': str(uuid.uuid4()),
+                'name': 'Sarah Johnson',
+                'email': 'sarah.johnson@example.com',
+                'company': 'FitLife Apps',
+                'phone': '+1-555-0102',
+                'password_hash': hash_password('client123'),
+                'is_active': True,
+                'created_at': datetime.now().isoformat(),
+                'created_by': admin['id']
+            },
+            {
+                'id': str(uuid.uuid4()),
+                'name': 'Michael Chen',
+                'email': 'michael.chen@example.com',
+                'company': 'DataViz Solutions',
+                'phone': '+1-555-0103',
+                'password_hash': hash_password('client123'),
+                'is_active': True,
+                'created_at': datetime.now().isoformat(),
+                'created_by': admin['id']
+            }
+        ]
+        
+        for sample_client in sample_clients:
+            await db.clients.insert_one(sample_client)
+            print(f"✅ Created client: {sample_client['name']} ({sample_client['email']})")
+        
+        clients = sample_clients
+    else:
+        print(f"✅ Found {len(clients)} existing clients")
     
     # Sample projects data
     projects_data = [
