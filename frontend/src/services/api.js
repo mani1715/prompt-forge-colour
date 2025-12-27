@@ -103,16 +103,21 @@ api.interceptors.response.use(
       const currentPath = window.location.pathname;
       
       // If already on login page, don't redirect
-      if (currentPath.includes('/admin/login')) {
+      if (currentPath.includes('/admin/login') || currentPath.includes('/client/login')) {
         return Promise.reject(error);
       }
 
       // Check if we have a token
-      const token = localStorage.getItem('admin_token') || localStorage.getItem('adminToken');
+      const adminToken = localStorage.getItem('admin_token') || localStorage.getItem('adminToken');
+      const clientToken = localStorage.getItem('client_token');
       
-      if (!token) {
-        // No token, redirect to login
-        window.location.href = '/admin/login';
+      if (!adminToken && !clientToken) {
+        // No token, redirect to appropriate login based on current path
+        if (currentPath.includes('/client')) {
+          window.location.href = '/client/login';
+        } else {
+          window.location.href = '/admin/login';
+        }
         return Promise.reject(error);
       }
 
@@ -130,18 +135,24 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       isRefreshing = true;
 
-      // Clear tokens and redirect
+      // Clear tokens and redirect to appropriate login
       localStorage.removeItem('admin_token');
       localStorage.removeItem('admin_user');
       localStorage.removeItem('adminToken');
       localStorage.removeItem('adminUser');
+      localStorage.removeItem('client_token');
+      localStorage.removeItem('client_data');
       
       processQueue(error, null);
       isRefreshing = false;
       
       // Small delay to prevent multiple redirects
       setTimeout(() => {
-        window.location.href = '/admin/login';
+        if (currentPath.includes('/client')) {
+          window.location.href = '/client/login';
+        } else {
+          window.location.href = '/admin/login';
+        }
       }, 100);
       
       return Promise.reject(error);
