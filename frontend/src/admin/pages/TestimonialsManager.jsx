@@ -221,7 +221,7 @@ const TestimonialsManager = () => {
                         <div>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <span style={{ fontWeight: '500', color: '#111827' }}>{testimonial.name}</span>
-                            {testimonial.source === 'customer_submitted' && testimonial.verified && (
+                            {(testimonial.source === 'client_portal' || testimonial.source === 'public_submitted') && testimonial.verified && (
                               <BadgeCheck size={14} style={{ color: '#3b82f6' }} title="Verified Customer" />
                             )}
                           </div>
