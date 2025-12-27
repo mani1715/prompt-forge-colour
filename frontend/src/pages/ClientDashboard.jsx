@@ -59,6 +59,49 @@ export default function ClientDashboard() {
     }
   };
 
+  const fetchMyTestimonials = async (token) => {
+    try {
+      const response = await api.get('/testimonials/client/my-testimonials', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setMyTestimonials(response.data);
+    } catch (error) {
+      console.error('Error fetching testimonials:', error);
+    }
+  };
+
+  const handleSubmitTestimonial = async (e) => {
+    e.preventDefault();
+    
+    if (!testimonialForm.message.trim() || testimonialForm.message.length < 10) {
+      toast.error('Please write at least 10 characters for your testimonial');
+      return;
+    }
+
+    setSubmittingTestimonial(true);
+    const token = localStorage.getItem('client_token');
+
+    try {
+      await api.post('/testimonials/client/submit', testimonialForm, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      toast.success('✅ Testimonial submitted successfully! It will be reviewed by admin.');
+      setTestimonialForm({ role: '', message: '', rating: 5 });
+      setShowTestimonialForm(false);
+      fetchMyTestimonials(token);
+    } catch (error) {
+      console.error('Error submitting testimonial:', error);
+      toast.error('Failed to submit testimonial. Please try again.');
+    } finally {
+      setSubmittingTestimonial(false);
+    }
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('client_token');
     localStorage.removeItem('client_data');
