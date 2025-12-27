@@ -34,10 +34,12 @@ const getApiBaseUrl = () => {
   // Case 3: Absolute URL (production - Vercel + Render)
   let finalUrl = backendUrl;
   
-  // Ensure HTTPS in production
-  if (window.location.protocol === 'https:' && finalUrl.startsWith('http://')) {
-    finalUrl = finalUrl.replace('http://', 'https://');
-    console.log('[API Config] ⚠️ Upgraded to HTTPS:', finalUrl);
+  // Ensure HTTPS in production - ALWAYS match current page protocol
+  if (window.location.protocol === 'https:') {
+    if (finalUrl.startsWith('http://')) {
+      finalUrl = finalUrl.replace('http://', 'https://');
+      console.log('[API Config] ⚠️ Upgraded to HTTPS:', finalUrl);
+    }
   }
   
   // Add /api suffix if not present
