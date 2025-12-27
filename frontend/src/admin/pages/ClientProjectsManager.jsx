@@ -381,6 +381,110 @@ export default function ClientProjectsManager() {
     }
   };
 
+  // Enhanced features handlers
+  const handleBulkDelete = async () => {
+    if (selectedProjects.length === 0) {
+      toast.error('No projects selected');
+      return;
+    }
+
+    if (!window.confirm(`Are you sure you want to delete ${selectedProjects.length} project(s)?`)) {
+      return;
+    }
+
+    try {
+      await Promise.all(selectedProjects.map(id => clientService.deleteClientProject(id)));
+      toast.success(`${selectedProjects.length} project(s) deleted successfully`);
+      setSelectedProjects([]);
+      fetchProjects();
+    } catch (error) {
+      console.error('Error deleting projects:', error);
+      toast.error('Failed to delete some projects');
+    }
+  };
+
+  const handleBulkStatusUpdate = async (newStatus) => {
+    if (selectedProjects.length === 0) {
+      toast.error('No projects selected');
+      return;
+    }
+
+    try {
+      await Promise.all(selectedProjects.map(id => 
+        clientService.updateClientProject(id, { status: newStatus })
+      ));
+      toast.success(`${selectedProjects.length} project(s) updated successfully`);
+      setSelectedProjects([]);
+      fetchProjects();
+    } catch (error) {
+      console.error('Error updating projects:', error);
+      toast.error('Failed to update some projects');
+    }
+  };
+
+  const handleExportProjects = () => {
+    const dataToExport = filteredProjects.map(p => ({
+      Name: p.name,
+      Client: getClientName(p.client_id),
+      Status: getStatusLabel(p.status),
+      Priority: p.priority,
+      Progress: `${p.progress}%`,
+      'Expected Delivery': p.expected_delivery || 'N/A',
+    }));
+
+    const csv = [
+      Object.keys(dataToExport[0] || {}).join(','),
+      ...dataToExport.map(row => Object.values(row).join(','))
+    ].join('\\n');
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `projects-${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+    toast.success('Projects exported successfully');
+  };
+
+  const handleDuplicateProject = async (project) => {
+    try {
+      const duplicateData = {
+        name: `${project.name} (Copy)`,
+        client_id: project.client_id,
+        description: project.description,
+        status: 'pending',
+        priority: project.priority,
+        progress: 0,
+        notes: project.notes,
+      };
+      await clientService.createClientProject(duplicateData);
+      toast.success('Project duplicated successfully');
+      fetchProjects();
+    } catch (error) {
+      console.error('Error duplicating project:', error);
+      toast.error('Failed to duplicate project');
+    }
+  };
+
+  const toggleProjectSelection = (projectId) => {
+    setSelectedProjects(prev => 
+      prev.includes(projectId) 
+        ? prev.filter(id => id !== projectId)
+        : [...prev, projectId]
+    );
+  };
+
+  const toggleAllProjects = () => {
+    if (selectedProjects.length === filteredProjects.length) {
+      setSelectedProjects([]);
+    } else {
+      setSelectedProjects(filteredProjects.map(p => p.id));
+    }
+  };
+
   const getStatusColor = (status) => {
     const colors = {
       pending: 'bg-yellow-100 text-yellow-800',
