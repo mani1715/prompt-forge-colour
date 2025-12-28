@@ -5,7 +5,7 @@ When trying to add milestones, tasks, or other data in the Admin Panel's Client 
 
 ### Error 1: Mixed Content Error
 ```
-Mixed Content: The page at 'https://code-rescue-56.preview.emergentagent.com/admin/client-projects' 
+Mixed Content: The page at 'https://error-patrol-5.preview.emergentagent.com/admin/client-projects' 
 was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint 
 'http://data-updater-2.preview.emergentagent.com/api/admin/client-projects/...'
 ```
@@ -59,7 +59,7 @@ MONGODB_URI=mongodb://localhost:27017
 DB_NAME=mspn_dev_db
 
 # CORS Configuration
-CORS_ORIGINS=http://localhost:3000,https://code-rescue-56.preview.emergentagent.com
+CORS_ORIGINS=http://localhost:3000,https://error-patrol-5.preview.emergentagent.com
 
 # Security
 SECRET_KEY=mspn-dev-secret-key-for-local-development-change-in-production
@@ -153,7 +153,7 @@ However, this only worked if the URL was absolute. By using a **relative path** 
 
 The backend CORS settings now include both:
 - `http://localhost:3000` - for local development
-- `https://code-rescue-56.preview.emergentagent.com` - for production
+- `https://error-patrol-5.preview.emergentagent.com` - for production
 
 This ensures API calls are accepted from both environments.
 
