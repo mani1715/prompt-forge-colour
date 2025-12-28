@@ -32,49 +32,29 @@ const processQueue = (error, token = null) => {
 // Add token to requests if available AND ensure correct base URL
 api.interceptors.request.use(
   (config) => {
-    // CRITICAL: Build the correct base URL on EVERY request to ensure protocol matches
+    // CRITICAL: Ensure HTTPS protocol is used when page is loaded over HTTPS
     const backendUrl = process.env.REACT_APP_BACKEND_URL || '/api';
+    
+    // Determine the correct base URL with proper protocol
     let baseURL = backendUrl;
     
-    // If relative path and HTTPS page, convert to absolute HTTPS URL
-    if (backendUrl.startsWith('/')) {
-      if (typeof window !== 'undefined' && window.location.protocol === 'https:') {
+    if (typeof window !== 'undefined' && window.location.protocol === 'https:') {
+      // Page is loaded over HTTPS - ensure all API calls use HTTPS
+      if (backendUrl.startsWith('/')) {
+        // Relative URL - use current origin with HTTPS
         baseURL = `${window.location.origin}${backendUrl}`;
-        console.log('[API Request] Using HTTPS URL:', baseURL);
+      } else if (backendUrl.startsWith('http://')) {
+        // HTTP URL - upgrade to HTTPS
+        baseURL = backendUrl.replace('http://', 'https://');
+      } else if (!backendUrl.startsWith('https://')) {
+        // No protocol specified - add HTTPS
+        baseURL = `https://${backendUrl}`;
       }
-    } else if (backendUrl.startsWith('http://') && typeof window !== 'undefined' && window.location.protocol === 'https:') {
-      // Upgrade HTTP to HTTPS if page is HTTPS
-      baseURL = backendUrl.replace('http://', 'https://');
-      console.log('[API Request] Upgraded to HTTPS:', baseURL);
+      console.log('[API Request] Using HTTPS URL:', baseURL);
     }
     
-    // Build the full URL - ensure config.url is properly combined with baseURL
-    // If config.url is already an absolute URL, don't modify it
-    if (config.url && !config.url.startsWith('http://') && !config.url.startsWith('https://')) {
-      // For relative URLs, ensure we use the correct protocol
-      if (typeof window !== 'undefined' && window.location.protocol === 'https:') {
-        // If the URL starts with /, it's absolute path
-        if (config.url.startsWith('/')) {
-          config.url = `${window.location.origin}${config.url}`;
-        } else {
-          // If it's a relative path, combine with baseURL
-          config.url = `${baseURL}/${config.url}`;
-        }
-        console.log('[API Request] Final URL:', config.url);
-      } else {
-        // Set the base URL for this request (for non-HTTPS)
-        config.baseURL = baseURL;
-      }
-    } else {
-      // For absolute URLs, upgrade HTTP to HTTPS if needed
-      if (config.url && config.url.startsWith('http://') && typeof window !== 'undefined' && window.location.protocol === 'https:') {
-        config.url = config.url.replace('http://', 'https://');
-        console.log('[API Request] Upgraded URL to HTTPS:', config.url);
-      } else {
-        // Set the base URL for this request
-        config.baseURL = baseURL;
-      }
-    }
+    // Set the base URL for this request
+    config.baseURL = baseURL;
     
     // Check for both admin and client tokens
     const token = localStorage.getItem('admin_token') || 
