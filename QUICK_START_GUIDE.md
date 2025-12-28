@@ -2,10 +2,10 @@
 
 ## 🚀 Access Your Application
 
-**Live URL:** https://dev-playground-54.preview.emergentagent.com
+**Live URL:** https://api-secure-update.preview.emergentagent.com
 
 ### Admin Panel Login
-**URL:** https://dev-playground-54.preview.emergentagent.com/admin/login
+**URL:** https://api-secure-update.preview.emergentagent.com/admin/login
 
 ```
 Username: admin
@@ -315,9 +315,9 @@ Your portfolio management system is now fully operational with:
 ---
 
 **Quick Links:**
-- Admin Login: https://dev-playground-54.preview.emergentagent.com/admin/login
-- Client Login: https://dev-playground-54.preview.emergentagent.com/client/login
-- Main Site: https://dev-playground-54.preview.emergentagent.com
+- Admin Login: https://api-secure-update.preview.emergentagent.com/admin/login
+- Client Login: https://api-secure-update.preview.emergentagent.com/client/login
+- Main Site: https://api-secure-update.preview.emergentagent.com
 
 **Documentation:**
 - Full fix details: `/app/MIXED_CONTENT_FIX_COMPLETE.md`

@@ -5,7 +5,7 @@
 **Very Important!** Your browser might be caching the old JavaScript files.
 
 ### Chrome/Edge:
-1. Open the page: `https://dev-playground-54.preview.emergentagent.com`
+1. Open the page: `https://api-secure-update.preview.emergentagent.com`
 2. Press **Ctrl + Shift + Delete** (or Cmd + Shift + Delete on Mac)
 3. Select "Cached images and files"
 4. Select "All time"
@@ -20,7 +20,7 @@
 
 ## Step 2: Check Console for Errors
 
-1. Open the admin panel: `https://dev-playground-54.preview.emergentagent.com/admin/login`
+1. Open the admin panel: `https://api-secure-update.preview.emergentagent.com/admin/login`
 2. Login with: `admin` / `admin123`
 3. Open browser console: Press **F12** or **Ctrl + Shift + I**
 4. Click on the "Console" tab
@@ -37,9 +37,9 @@
 ```
 [API Config] Environment: development
 [API Config] REACT_APP_BACKEND_URL: /api
-[API Config] Current origin: https://dev-playground-54.preview.emergentagent.com
+[API Config] Current origin: https://api-secure-update.preview.emergentagent.com
 [API Config] Current protocol: https:
-[API Config] ✅ Using absolute HTTPS URL: https://dev-playground-54.preview.emergentagent.com/api
+[API Config] ✅ Using absolute HTTPS URL: https://api-secure-update.preview.emergentagent.com/api
 ```
 
 ### ❌ BAD - If you see this:
@@ -82,7 +82,7 @@ Open browser console and run this:
 console.log('Testing API configuration...');
 
 // This should show the configured base URL
-fetch('https://dev-playground-54.preview.emergentagent.com/api/')
+fetch('https://api-secure-update.preview.emergentagent.com/api/')
   .then(r => r.json())
   .then(data => console.log('✅ API Response:', data))
   .catch(e => console.error('❌ API Error:', e));
@@ -105,7 +105,7 @@ console.log('Auth token exists:', !!token);
 // Test task creation endpoint (replace PROJECT_ID with actual project ID)
 const PROJECT_ID = '78bb9c3e-6652-4afc-b352-f9585c9a5a7d'; // Your project ID
 
-fetch(`https://dev-playground-54.preview.emergentagent.com/api/admin/client-projects/${PROJECT_ID}/tasks`, {
+fetch(`https://api-secure-update.preview.emergentagent.com/api/admin/client-projects/${PROJECT_ID}/tasks`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ If nothing works, try this **nuclear option**:
 2. Clear browser cache completely
 3. Close browser completely
 4. Reopen browser
-5. Go to: `https://dev-playground-54.preview.emergentagent.com/admin/login`
+5. Go to: `https://api-secure-update.preview.emergentagent.com/admin/login`
 6. Try again
 
 ## Step 8: Try Incognito/Private Window
@@ -149,7 +149,7 @@ If nothing works, try this **nuclear option**:
 This will use a fresh cache:
 
 1. Open **Incognito/Private** window
-2. Go to: `https://dev-playground-54.preview.emergentagent.com/admin/login`
+2. Go to: `https://api-secure-update.preview.emergentagent.com/admin/login`
 3. Login
 4. Try adding a task
 
@@ -187,4 +187,4 @@ Should show:
 grep "CORS enabled" /var/log/supervisor/backend.err.log | tail -1
 ```
 
-Should include: `https://dev-playground-54.preview.emergentagent.com`
+Should include: `https://api-secure-update.preview.emergentagent.com`

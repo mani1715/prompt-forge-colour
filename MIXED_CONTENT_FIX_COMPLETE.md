@@ -2,13 +2,13 @@
 
 ## Problem Identified
 Your application was experiencing a **Mixed Content Security Error** where:
-- Frontend was loaded over **HTTPS** (https://dev-playground-54.preview.emergentagent.com)
+- Frontend was loaded over **HTTPS** (https://api-secure-update.preview.emergentagent.com)
 - But API calls were being made over **HTTP** (http://codebase-19.preview.emergentagent.com/api)
 - Modern browsers block HTTP requests from HTTPS pages for security reasons
 
 ### Error Message You Were Seeing:
 ```
-Mixed Content: The page at 'https://dev-playground-54.preview.emergentagent.com/admin/clients' 
+Mixed Content: The page at 'https://api-secure-update.preview.emergentagent.com/admin/clients' 
 was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint 
 'http://codebase-19.preview.emergentagent.com/api/admin/clients/'. 
 This request has been blocked; the content must be served over HTTPS.
@@ -104,9 +104,9 @@ Password: admin123
 ## How It Works Now
 
 1. **When you access the site via HTTPS:**
-   - Frontend detects: `window.location.origin` = "https://dev-playground-54.preview.emergentagent.com"
+   - Frontend detects: `window.location.origin` = "https://api-secure-update.preview.emergentagent.com"
    - Backend URL configured as: `/api`
-   - Final API URL: "https://dev-playground-54.preview.emergentagent.com/api" ✅
+   - Final API URL: "https://api-secure-update.preview.emergentagent.com/api" ✅
 
 2. **When you access the site via HTTP (local dev):**
    - Frontend detects: `window.location.origin` = "http://localhost:3000"
@@ -116,7 +116,7 @@ Password: admin123
 ## Testing Instructions
 
 ### 1. Test Admin Login
-1. Navigate to: `https://dev-playground-54.preview.emergentagent.com/admin/login`
+1. Navigate to: `https://api-secure-update.preview.emergentagent.com/admin/login`
 2. Enter credentials:
    - Username: `admin`
    - Password: `admin123`
@@ -170,7 +170,7 @@ Password: admin123
 
 **After (Success):**
 ```
-✅ [API Request] Using origin-based URL: https://dev-playground-54.preview.emergentagent.com/api
+✅ [API Request] Using origin-based URL: https://api-secure-update.preview.emergentagent.com/api
 ✅ Request successful
 ```
 
@@ -359,8 +359,8 @@ The following MongoDB collections are being used:
 **All errors mentioned in your problem statement have been resolved!** 🎉
 
 The application is now ready to use. You can access it at:
-- Frontend: https://dev-playground-54.preview.emergentagent.com
-- Admin Panel: https://dev-playground-54.preview.emergentagent.com/admin/login
+- Frontend: https://api-secure-update.preview.emergentagent.com
+- Admin Panel: https://api-secure-update.preview.emergentagent.com/admin/login
 
 ---
 
