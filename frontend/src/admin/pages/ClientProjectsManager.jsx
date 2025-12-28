@@ -1576,7 +1576,7 @@ function TeamDialog({ open, data, onClose, onSave }) {
 function BudgetDialog({ open, data, onClose, onSave }) {
   const [formData, setFormData] = useState({
     total_amount: 0,
-    currency: 'USD',
+    currency: 'INR',
     paid_amount: 0,
     payment_terms: ''
   });
@@ -1585,14 +1585,14 @@ function BudgetDialog({ open, data, onClose, onSave }) {
     if (data) {
       setFormData({
         total_amount: data.total_amount || 0,
-        currency: data.currency || 'USD',
+        currency: data.currency || 'INR',
         paid_amount: data.paid_amount || 0,
         payment_terms: data.payment_terms || ''
       });
     } else {
       setFormData({
         total_amount: 0,
-        currency: 'USD',
+        currency: 'INR',
         paid_amount: 0,
         payment_terms: ''
       });
