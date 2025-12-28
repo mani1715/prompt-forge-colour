@@ -22,7 +22,8 @@ import { toast } from 'sonner';
 import { 
   LogOut, Download, Calendar, FileText, Briefcase, TrendingUp, Clock, 
   CheckCircle2, AlertCircle, Sparkles, Users, Building2, Star, MessageSquare, 
-  Send, Target, ListChecks, DollarSign, Activity, MessageCircle, User
+  Send, Target, ListChecks, DollarSign, Activity, MessageCircle, User, 
+  Search, Filter, Download as DownloadIcon, Tag, AlertTriangle, RefreshCw
 } from 'lucide-react';
 
 export default function ClientDashboard() {
