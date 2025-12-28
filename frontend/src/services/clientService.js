@@ -3,7 +3,7 @@ import api from './api';
 const clientService = {
   // Get all clients
   getAllClients: async () => {
-    const response = await api.get('/admin/clients');
+    const response = await api.get('/admin/clients/');
     return response.data;
   },
 
@@ -15,7 +15,7 @@ const clientService = {
 
   // Create new client
   createClient: async (clientData) => {
-    const response = await api.post('/admin/clients', clientData);
+    const response = await api.post('/admin/clients/', clientData);
     return response.data;
   },
 
@@ -39,7 +39,7 @@ const clientService = {
 
   // Create client project
   createClientProject: async (projectData) => {
-    const response = await api.post('/admin/client-projects', projectData);
+    const response = await api.post('/admin/client-projects/', projectData);
     return response.data;
   },
 
@@ -57,7 +57,7 @@ const clientService = {
 
   // Get all client projects
   getAllClientProjects: async () => {
-    const response = await api.get('/admin/client-projects');
+    const response = await api.get('/admin/client-projects/');
     return response.data;
   },
 
