@@ -87,14 +87,23 @@ webpackConfig.devServer = (devServerConfig) => {
   const useProxy = process.env.USE_WEBPACK_PROXY === 'true';
   
   if (useProxy) {
-    // Add proxy configuration for API requests (local development only)
+    // Determine the correct protocol for the backend target
+    // In production/preview with HTTPS, use HTTPS for backend
+    const backendProtocol = process.env.NODE_ENV === 'production' ? 'https:' : 'http:';
+    const backendHost = process.env.BACKEND_HOST || 'localhost:8001';
+    const backendTarget = `${backendProtocol}//${backendHost}`;
+    
+    // Add proxy configuration for API requests
     devServerConfig.proxy = {
       '/api': {
-        target: 'http://localhost:8001',
+        target: backendTarget,
         changeOrigin: true,
         secure: false,
+        ws: true, // Enable WebSocket proxying
+        logLevel: 'debug'
       },
     };
+    console.log(`[Proxy] Configured /api proxy to: ${backendTarget}`);
   }
   // Otherwise, /api requests go directly to the same host (handled by ingress)
 
