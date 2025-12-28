@@ -562,15 +562,21 @@ export default function ClientDashboard() {
         )}
 
         {/* Projects */}
-        {projects.length === 0 ? (
+        {filteredProjects.length === 0 ? (
           <Card className="border-2 border-dashed border-gray-300 bg-white">
             <CardContent className="py-16 text-center">
               <div className="w-20 h-20 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Briefcase className="w-10 h-10 text-gray-400" />
               </div>
-              <p className="text-xl font-semibold text-gray-700 mb-2">No projects assigned yet</p>
+              <p className="text-xl font-semibold text-gray-700 mb-2">
+                {searchQuery || statusFilter !== 'all' || priorityFilter !== 'all' 
+                  ? 'No projects match your filters' 
+                  : 'No projects assigned yet'}
+              </p>
               <p className="text-sm text-gray-500 max-w-md mx-auto">
-                Your project manager will assign projects to you soon.
+                {searchQuery || statusFilter !== 'all' || priorityFilter !== 'all'
+                  ? 'Try adjusting your search or filter criteria'
+                  : 'Your project manager will assign projects to you soon.'}
               </p>
             </CardContent>
           </Card>
@@ -580,11 +586,11 @@ export default function ClientDashboard() {
             <div className="lg:col-span-1">
               <Card className="border-2 border-purple-200 shadow-lg">
                 <CardHeader className="border-b bg-gradient-to-r from-purple-50 to-indigo-50">
-                  <CardTitle className="text-lg">Your Projects</CardTitle>
+                  <CardTitle className="text-lg">Your Projects ({filteredProjects.length})</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
                   <div className="divide-y max-h-[600px] overflow-y-auto">
-                    {projects.map((project) => (
+                    {filteredProjects.map((project) => (
                       <div
                         key={project.id}
                         onClick={() => {
@@ -596,10 +602,18 @@ export default function ClientDashboard() {
                         }`}
                         data-testid={`project-item-${project.id}`}
                       >
-                        <h3 className="font-semibold text-gray-900 mb-1">{project.name}</h3>
-                        <Badge className={`${getStatusColor(project.status)} text-xs`}>
-                          {getStatusLabel(project.status)}
-                        </Badge>
+                        <h3 className="font-semibold text-gray-900 mb-2">{project.name}</h3>
+                        <div className="flex flex-wrap gap-2 mb-2">
+                          <Badge className={`${getStatusColor(project.status)} text-xs`}>
+                            {getStatusLabel(project.status)}
+                          </Badge>
+                          {project.priority && (
+                            <Badge className={`${getPriorityColor(project.priority)} text-xs flex items-center gap-1`}>
+                              {getPriorityIcon(project.priority)}
+                              {project.priority}
+                            </Badge>
+                          )}
+                        </div>
                         <div className="mt-2">
                           <Progress value={project.progress} className="h-1.5" />
                           <p className="text-xs text-gray-600 mt-1">{project.progress}% Complete</p>
