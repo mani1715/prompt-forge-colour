@@ -7,42 +7,25 @@ import axios from 'axios';
  * to ensure HTTPS is used in production environments
  */
 
-// Determine the correct base URL based on environment
-const getBaseURL = () => {
-  // Get the configured backend URL from environment
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || '/api';
-  
-  console.log('[API Config] Raw REACT_APP_BACKEND_URL:', process.env.REACT_APP_BACKEND_URL);
-  console.log('[API Config] Using backend URL:', backendUrl);
-  
-  // CRITICAL FIX: For relative URLs, keep them relative!
-  // This lets the browser use the same protocol/host automatically
-  if (backendUrl.startsWith('/')) {
-    console.log('[API Config] Using relative URL (browser will use current protocol):', backendUrl);
-    return backendUrl;
-  }
-  
-  // If it's an absolute URL and we're on HTTPS, force HTTPS
-  if (typeof window !== 'undefined' && window.location.protocol === 'https:') {
-    if (backendUrl.startsWith('http://')) {
-      const httpsUrl = backendUrl.replace('http://', 'https://');
-      console.log('[API Config] Upgraded HTTP to HTTPS:', httpsUrl);
-      return httpsUrl;
-    }
-  }
-  
-  console.log('[API Config] Final base URL:', backendUrl);
-  return backendUrl;
-};
+/**
+ * CRITICAL FIX FOR MIXED CONTENT ERROR
+ * 
+ * DO NOT set baseURL here! Instead, we'll use relative URLs (/api/...)
+ * which automatically inherit the page's protocol (HTTPS in production)
+ * 
+ * This prevents Mixed Content errors where HTTPS pages try to make HTTP requests
+ */
 
-// Create axios instance WITH proper baseURL
+// Create axios instance WITHOUT baseURL - we'll use relative URLs
 const api = axios.create({
-  baseURL: getBaseURL(),
+  baseURL: '/api',  // Always use relative URL - browser uses current protocol
   headers: {
     'Content-Type': 'application/json',
   },
   timeout: 15000, // 15 second default timeout
 });
+
+console.log('[API Config] Using baseURL: /api (relative - inherits page protocol)');
 
 let isRefreshing = false;
 let failedQueue = [];
