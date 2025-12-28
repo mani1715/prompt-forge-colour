@@ -32,9 +32,6 @@ const api = axios.create({
   timeout: 15000, // 15 second default timeout
 });
 
-// Force axios to never convert to HTTP
-axios.defaults.adapter = require('axios/lib/adapters/xhr');
-
 let isRefreshing = false;
 let failedQueue = [];
 
