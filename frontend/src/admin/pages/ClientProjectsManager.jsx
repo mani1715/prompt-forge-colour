@@ -1483,7 +1483,7 @@ function TaskDialog({ open, data, milestones, onClose, onSave }) {
                     <SelectValue placeholder="Select milestone" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">None</SelectItem>
+                    <SelectItem value="none">None</SelectItem>
                     {milestones.map((milestone) => (
                       <SelectItem key={milestone.id} value={milestone.id}>
                         {milestone.title}
