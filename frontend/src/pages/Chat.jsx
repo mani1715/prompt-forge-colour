@@ -1,14 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { MessageCircle, Send, User, Mail, Phone, Clock, Star, CheckCircle } from 'lucide-react';
 import axios from 'axios';
-
-const getBackendURL = () => {
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
-  if (!backendUrl || backendUrl.trim() === '') {
-    return '/api';  // Use relative path for Kubernetes ingress
-  }
-  return backendUrl.endsWith('/api') ? backendUrl : `${backendUrl}/api`;
-};
+import { getBackendURL } from '../lib/utils';
 
 const BACKEND_URL = getBackendURL();
 
