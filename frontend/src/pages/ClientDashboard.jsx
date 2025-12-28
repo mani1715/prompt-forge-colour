@@ -449,7 +449,7 @@ export default function ClientDashboard() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card className="border-2 border-blue-200 shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-white to-blue-50">
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
@@ -496,7 +496,70 @@ export default function ClientDashboard() {
               </div>
             </CardContent>
           </Card>
+
+          <Card className="border-2 border-orange-200 shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-white to-orange-50">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Urgent</p>
+                  <p className="text-4xl font-bold text-orange-600 mt-2">
+                    {projects.filter(p => p.priority === 'urgent' || p.priority === 'high').length}
+                  </p>
+                </div>
+                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center shadow-lg">
+                  <AlertTriangle className="w-8 h-8 text-white" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
+
+        {/* Search and Filter Section */}
+        {projects.length > 0 && (
+          <Card className="border-2 border-gray-200 shadow-lg mb-6">
+            <CardContent className="pt-6">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="md:col-span-2">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                    <Input
+                      placeholder="Search projects..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="pl-10"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                    className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  >
+                    <option value="all">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="in_progress">In Progress</option>
+                    <option value="review">Under Review</option>
+                    <option value="completed">Completed</option>
+                  </select>
+                </div>
+                <div>
+                  <select
+                    value={priorityFilter}
+                    onChange={(e) => setPriorityFilter(e.target.value)}
+                    className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  >
+                    <option value="all">All Priority</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                    <option value="urgent">Urgent</option>
+                  </select>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Projects */}
         {projects.length === 0 ? (
