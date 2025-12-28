@@ -60,45 +60,14 @@ const processQueue = (error, token = null) => {
   failedQueue = [];
 };
 
-// Add token to requests if available AND ensure correct base URL
+// Add token to requests and ensure HTTPS in production
 api.interceptors.request.use(
   (config) => {
-    // CRITICAL: Ensure HTTPS protocol is used when page is loaded over HTTPS
-    const backendUrl = process.env.REACT_APP_BACKEND_URL || '/api';
-    
-    // Determine the correct base URL with proper protocol
-    let baseURL = backendUrl;
-    
-    if (typeof window !== 'undefined') {
-      // Page is loaded over HTTPS - ensure all API calls use HTTPS
-      if (backendUrl.startsWith('/')) {
-        // Relative URL - use current origin (automatically handles protocol)
-        baseURL = `${window.location.origin}${backendUrl}`;
-        console.log('[API Request] Using origin-based URL:', baseURL);
-      } else if (window.location.protocol === 'https:' && backendUrl.startsWith('http://')) {
-        // HTTP URL but page is HTTPS - upgrade to HTTPS
-        baseURL = backendUrl.replace('http://', 'https://');
-        console.log('[API Request] Upgraded to HTTPS URL:', baseURL);
-      } else if (!backendUrl.startsWith('http://') && !backendUrl.startsWith('https://')) {
-        // No protocol specified - use same protocol as page
-        baseURL = `${window.location.protocol}//${backendUrl}`;
-        console.log('[API Request] Added protocol:', baseURL);
-      } else {
-        console.log('[API Request] Using configured URL:', baseURL);
-      }
-    }
-    
-    // Set the base URL for this request
-    config.baseURL = baseURL;
-    
-    // CRITICAL FIX: If config.url is an absolute URL with wrong protocol, fix it
-    if (config.url && typeof window !== 'undefined' && window.location.protocol === 'https:') {
-      // Check if config.url is absolute (contains ://)
-      if (config.url.includes('://')) {
-        if (config.url.startsWith('http://')) {
-          config.url = config.url.replace('http://', 'https://');
-          console.log('[API Request] Fixed absolute URL protocol to HTTPS:', config.url);
-        }
+    // Double-check: If we're on HTTPS and somehow baseURL is HTTP, fix it
+    if (typeof window !== 'undefined' && window.location.protocol === 'https:') {
+      if (config.baseURL && config.baseURL.startsWith('http://')) {
+        config.baseURL = config.baseURL.replace('http://', 'https://');
+        console.log('[API Request] Force upgraded baseURL to HTTPS:', config.baseURL);
       }
     }
     
@@ -109,6 +78,8 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    
+    console.log('[API Request]', config.method.toUpperCase(), config.url, 'Base:', config.baseURL);
     
     return config;
   },
