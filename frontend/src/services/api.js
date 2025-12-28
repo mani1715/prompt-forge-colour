@@ -7,8 +7,39 @@ import axios from 'axios';
  * to ensure HTTPS is used in production environments
  */
 
-// Create axios instance WITHOUT baseURL - we'll set it per request
+// Determine the correct base URL based on environment
+const getBaseURL = () => {
+  // Get the configured backend URL from environment
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || '/api';
+  
+  // If it's a relative URL, construct full URL with current protocol
+  if (backendUrl.startsWith('/')) {
+    if (typeof window !== 'undefined') {
+      // Use the same protocol as the current page
+      const protocol = window.location.protocol;
+      const host = window.location.host;
+      const fullUrl = `${protocol}//${host}${backendUrl}`;
+      console.log('[API Config] Base URL constructed:', fullUrl);
+      return fullUrl;
+    }
+    return backendUrl;
+  }
+  
+  // If it's an absolute URL and we're on HTTPS, force HTTPS
+  if (typeof window !== 'undefined' && window.location.protocol === 'https:') {
+    if (backendUrl.startsWith('http://')) {
+      const httpsUrl = backendUrl.replace('http://', 'https://');
+      console.log('[API Config] Upgraded HTTP to HTTPS:', httpsUrl);
+      return httpsUrl;
+    }
+  }
+  
+  return backendUrl;
+};
+
+// Create axios instance WITH proper baseURL
 const api = axios.create({
+  baseURL: getBaseURL(),
   headers: {
     'Content-Type': 'application/json',
   },
