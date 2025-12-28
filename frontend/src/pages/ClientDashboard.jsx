@@ -712,16 +712,30 @@ export default function ClientDashboard() {
 
                       {/* Overview Tab */}
                       <TabsContent value="overview" className="space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
                             <p className="text-sm text-gray-600 mb-1">Progress</p>
                             <p className="text-3xl font-bold text-blue-600">{selectedProject.progress}%</p>
                             <Progress value={selectedProject.progress} className="h-2 mt-2" />
                           </div>
+                          {selectedProject.start_date && (
+                            <div className="bg-green-50 border-2 border-green-200 rounded-lg p-4">
+                              <p className="text-sm text-gray-600 mb-1">Start Date</p>
+                              <p className="text-lg font-semibold text-green-700 flex items-center gap-1">
+                                <Calendar className="w-4 h-4" />
+                                {new Date(selectedProject.start_date).toLocaleDateString('en-US', { 
+                                  year: 'numeric', 
+                                  month: 'long', 
+                                  day: 'numeric' 
+                                })}
+                              </p>
+                            </div>
+                          )}
                           {selectedProject.expected_delivery && (
                             <div className="bg-purple-50 border-2 border-purple-200 rounded-lg p-4">
                               <p className="text-sm text-gray-600 mb-1">Expected Delivery</p>
-                              <p className="text-lg font-semibold text-purple-700">
+                              <p className="text-lg font-semibold text-purple-700 flex items-center gap-1">
+                                <Clock className="w-4 h-4" />
                                 {new Date(selectedProject.expected_delivery).toLocaleDateString('en-US', { 
                                   year: 'numeric', 
                                   month: 'long', 
@@ -730,6 +744,30 @@ export default function ClientDashboard() {
                               </p>
                             </div>
                           )}
+                        </div>
+
+                        {/* Quick Stats */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                          <div className="bg-white border-2 border-gray-200 rounded-lg p-4 text-center">
+                            <Target className="w-8 h-8 text-purple-500 mx-auto mb-2" />
+                            <p className="text-2xl font-bold text-gray-900">{selectedProject.milestones?.length || 0}</p>
+                            <p className="text-xs text-gray-600">Milestones</p>
+                          </div>
+                          <div className="bg-white border-2 border-gray-200 rounded-lg p-4 text-center">
+                            <ListChecks className="w-8 h-8 text-blue-500 mx-auto mb-2" />
+                            <p className="text-2xl font-bold text-gray-900">{selectedProject.tasks?.length || 0}</p>
+                            <p className="text-xs text-gray-600">Tasks</p>
+                          </div>
+                          <div className="bg-white border-2 border-gray-200 rounded-lg p-4 text-center">
+                            <Users className="w-8 h-8 text-green-500 mx-auto mb-2" />
+                            <p className="text-2xl font-bold text-gray-900">{selectedProject.team_members?.length || 0}</p>
+                            <p className="text-xs text-gray-600">Team Members</p>
+                          </div>
+                          <div className="bg-white border-2 border-gray-200 rounded-lg p-4 text-center">
+                            <FileText className="w-8 h-8 text-orange-500 mx-auto mb-2" />
+                            <p className="text-2xl font-bold text-gray-900">{selectedProject.files?.length || 0}</p>
+                            <p className="text-xs text-gray-600">Files</p>
+                          </div>
                         </div>
 
                         {selectedProject.notes && (
@@ -743,6 +781,53 @@ export default function ClientDashboard() {
                             </p>
                           </div>
                         )}
+
+                        {/* Comments Section */}
+                        {selectedProject.comments && selectedProject.comments.length > 0 && (
+                          <div className="bg-white border-2 border-gray-200 rounded-xl p-5">
+                            <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                              <MessageSquare className="w-5 h-5 text-blue-600" />
+                              Comments ({selectedProject.comments.length})
+                            </h4>
+                            <div className="space-y-3 max-h-60 overflow-y-auto">
+                              {selectedProject.comments.map((comment) => (
+                                <div key={comment.id} className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                                  <div className="flex items-start justify-between mb-1">
+                                    <p className="text-sm font-semibold text-gray-900">{comment.user_name}</p>
+                                    <Badge variant="outline" className="text-xs">
+                                      {comment.user_type}
+                                    </Badge>
+                                  </div>
+                                  <p className="text-sm text-gray-700">{comment.message}</p>
+                                  <p className="text-xs text-gray-500 mt-1">
+                                    {new Date(comment.created_at).toLocaleString()}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Add Comment Form */}
+                        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-5">
+                          <h4 className="font-bold text-gray-900 mb-3">Add a Comment</h4>
+                          <form onSubmit={handleAddComment}>
+                            <Textarea
+                              value={commentText}
+                              onChange={(e) => setCommentText(e.target.value)}
+                              placeholder="Share your thoughts or feedback..."
+                              className="mb-3"
+                              rows={3}
+                            />
+                            <Button
+                              type="submit"
+                              disabled={submittingComment || !commentText.trim()}
+                              className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                            >
+                              {submittingComment ? 'Adding...' : 'Add Comment'}
+                            </Button>
+                          </form>
+                        </div>
                       </TabsContent>
 
                       {/* Milestones Tab */}
