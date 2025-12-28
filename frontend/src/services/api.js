@@ -60,11 +60,14 @@ api.interceptors.request.use(
     // Set the base URL for this request
     config.baseURL = baseURL;
     
-    // CRITICAL FIX: If the final URL in config.url is still using wrong protocol, fix it
+    // CRITICAL FIX: If config.url is an absolute URL with wrong protocol, fix it
     if (config.url && typeof window !== 'undefined' && window.location.protocol === 'https:') {
-      if (config.url.startsWith('http://')) {
-        config.url = config.url.replace('http://', 'https://');
-        console.log('[API Request] Fixed URL protocol to HTTPS:', config.url);
+      // Check if config.url is absolute (contains ://)
+      if (config.url.includes('://')) {
+        if (config.url.startsWith('http://')) {
+          config.url = config.url.replace('http://', 'https://');
+          console.log('[API Request] Fixed absolute URL protocol to HTTPS:', config.url);
+        }
       }
     }
     
