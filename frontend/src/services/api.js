@@ -35,48 +35,20 @@ const processQueue = (error, token = null) => {
   failedQueue = [];
 };
 
-// Add token to requests and construct full URL with correct protocol
+// Add token to requests
 api.interceptors.request.use(
   (config) => {
-    // CRITICAL FIX: Construct full URL with current page's protocol
-    // This prevents mixed content errors in production (HTTPS)
-    
-    if (config.url) {
-      // If URL already has protocol, force HTTPS if page is HTTPS
-      if (config.url.startsWith('http://') || config.url.startsWith('https://')) {
-        if (window.location.protocol === 'https:' && config.url.startsWith('http://')) {
-          config.url = config.url.replace('http://', 'https://');
-          console.warn('[API Security] FORCED HTTP→HTTPS upgrade:', config.url);
-        }
-      } 
-      // If relative URL, construct full URL with page's protocol
-      else {
-        const protocol = window.location.protocol; // 'https:' or 'http:'
-        const host = window.location.host; // domain with port
-        
-        // Ensure URL starts with /api
-        let path = config.url;
-        if (!path.startsWith('/api')) {
-          path = '/api' + (path.startsWith('/') ? '' : '/') + path;
-        }
-        
-        // Construct full URL with correct protocol
-        const fullUrl = `${protocol}//${host}${path}`;
-        config.url = fullUrl;
-        
-        console.log('[API] Constructed URL:', fullUrl);
-      }
-    }
-    
     // Check for both admin and client tokens
     const token = localStorage.getItem('admin_token') || 
                   localStorage.getItem('adminToken') || 
                   localStorage.getItem('client_token');
+    
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     
-    console.log('[API Request]', config.method?.toUpperCase(), config.url);
+    // Log request for debugging
+    console.log('[API Request]', config.method?.toUpperCase(), config.baseURL + config.url);
     
     return config;
   },
