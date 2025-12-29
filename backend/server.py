@@ -71,8 +71,55 @@ PORT = int(os.environ.get("PORT", 8001))
 app = FastAPI(
     title="MSPN DEV API",
     description="Backend API for MSPN DEV website and admin panel",
-    version="1.0.0"
+    version="1.0.0",
+    # CRITICAL: Trust proxy headers for HTTPS detection
+    # This is required for Kubernetes/Nginx ingress deployments
+    root_path="/api" if os.environ.get("TRUST_PROXY") == "true" else ""
 )
+
+# =============================================================================
+# PROXY TRUST CONFIGURATION (CRITICAL FOR HTTPS)
+# =============================================================================
+# When behind a reverse proxy (Kubernetes ingress, Nginx, etc.):
+# - The proxy terminates SSL/TLS (HTTPS)
+# - Backend receives plain HTTP requests
+# - Proxy adds X-Forwarded-* headers to indicate original protocol
+# 
+# FastAPI needs to trust these headers to:
+# 1. Generate correct URLs in responses (https:// not http://)
+# 2. Handle redirects properly
+# 3. Avoid Mixed Content errors in frontend
+# =============================================================================
+
+# Middleware to trust proxy headers
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request
+
+class ProxyHeaderMiddleware(BaseHTTPMiddleware):
+    """
+    Middleware to handle X-Forwarded-* headers from reverse proxy
+    This ensures FastAPI recognizes HTTPS requests correctly
+    """
+    async def dispatch(self, request: Request, call_next):
+        # Check for X-Forwarded-Proto header (indicates original protocol)
+        forwarded_proto = request.headers.get("X-Forwarded-Proto")
+        if forwarded_proto:
+            # Update the request scope to reflect the original protocol
+            request.scope["scheme"] = forwarded_proto
+            logger.debug(f"🔒 Request protocol updated to: {forwarded_proto}")
+        
+        # Check for X-Forwarded-Host header (indicates original host)
+        forwarded_host = request.headers.get("X-Forwarded-Host")
+        if forwarded_host:
+            request.scope["server"] = (forwarded_host, None)
+            logger.debug(f"🌐 Request host updated to: {forwarded_host}")
+        
+        response = await call_next(request)
+        return response
+
+# Add proxy header middleware FIRST (before CORS)
+app.add_middleware(ProxyHeaderMiddleware)
+logger.info("✅ Proxy header middleware enabled - trusting X-Forwarded-Proto and X-Forwarded-Host")
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
