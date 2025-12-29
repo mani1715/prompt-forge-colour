@@ -1,16 +1,20 @@
 import axios from 'axios';
 
 /**
- * CRITICAL FIX FOR MIXED CONTENT ERROR - PRODUCTION READY SOLUTION
+ * API SERVICE - KUBERNETES INGRESS COMPATIBLE
  * 
- * Issue: Mixed content error when HTTPS page tries to make HTTP API calls
- * Solution: Use empty baseURL and construct full URLs dynamically in request interceptor
- * This ensures the protocol always matches the current page (HTTP in dev, HTTPS in production)
+ * For Emergent/Kubernetes deployment:
+ * - Uses REACT_APP_BACKEND_URL from .env (defaults to /api)
+ * - Kubernetes ingress routes /api/* to backend service on port 8001
+ * - Uses relative URLs for proper routing through ingress
  */
 
-// Create axios instance with NO baseURL - we'll construct it dynamically per request
+// Get backend URL from environment variable
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '/api';
+
+// Create axios instance with proper baseURL
 const api = axios.create({
-  // NO baseURL here - will be constructed in interceptor
+  baseURL: BACKEND_URL,
   headers: {
     'Content-Type': 'application/json',
   },
