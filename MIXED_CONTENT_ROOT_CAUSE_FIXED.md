@@ -7,7 +7,7 @@ After investigating the error logs you provided, I found the **actual root cause
 
 **Error Log Analysis:**
 ```
-[API] Constructed URL: https://network-debug-3.preview.emergentagent.com/api/client/projects ✅
+[API] Constructed URL: https://secure-api-fix-1.preview.emergentagent.com/api/client/projects ✅
 BUT
 Mixed Content Error: http://code-craft-57.preview.emergentagent.com/api/client/projects/ ❌
 ```
@@ -23,7 +23,7 @@ Mixed Content Error: http://code-craft-57.preview.emergentagent.com/api/client/p
 **Setting**: `USE_WEBPACK_PROXY=true` ← THIS WAS THE PROBLEM!
 
 **How it Broke Things:**
-1. Our interceptor constructed: `https://network-debug-3.preview.emergentagent.com/api/client/projects`
+1. Our interceptor constructed: `https://secure-api-fix-1.preview.emergentagent.com/api/client/projects`
 2. Axios sent the request
 3. Webpack proxy intercepted `/api` requests
 4. Proxy configuration in `craco.config.js` redirected to: `http://localhost:8001`
@@ -140,7 +140,7 @@ api.interceptors.request.use((config) => {
 3. Click "Clear Now"
 
 ### Step 2: Test Client Dashboard
-1. Navigate to: `https://network-debug-3.preview.emergentagent.com/client/dashboard`
+1. Navigate to: `https://secure-api-fix-1.preview.emergentagent.com/client/dashboard`
 2. Login with: `john@acmecorp.com` / `client123`
 3. Open Browser DevTools (F12)
 4. Go to **Console** tab
@@ -149,8 +149,8 @@ api.interceptors.request.use((config) => {
 
 **GOOD - What You Should See:**
 ```
-[API] Constructed URL: https://network-debug-3.preview.emergentagent.com/api/client/projects
-[API Request] GET https://network-debug-3.preview.emergentagent.com/api/client/projects
+[API] Constructed URL: https://secure-api-fix-1.preview.emergentagent.com/api/client/projects
+[API Request] GET https://secure-api-fix-1.preview.emergentagent.com/api/client/projects
 ```
 
 **BAD - What You Should NOT See:**
@@ -165,7 +165,7 @@ api.interceptors.request.use((config) => {
 2. Filter by "Fetch/XHR"
 3. Click on `/api/client/projects` request
 4. Check **Headers** → **General** → **Request URL**
-5. Verify it shows: `https://network-debug-3.preview.emergentagent.com/api/client/projects`
+5. Verify it shows: `https://secure-api-fix-1.preview.emergentagent.com/api/client/projects`
 
 ### Step 5: Test Data Sync
 1. Keep client dashboard open
@@ -221,7 +221,7 @@ tail -n 50 /var/log/supervisor/frontend.out.log | grep -i proxy
 #### Check Backend API
 ```bash
 # Test backend directly
-curl -X POST https://network-debug-3.preview.emergentagent.com/api/clients/login \
+curl -X POST https://secure-api-fix-1.preview.emergentagent.com/api/clients/login \
   -H "Content-Type: application/json" \
   -d '{"email":"john@acmecorp.com","password":"client123"}'
 
