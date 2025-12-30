@@ -299,6 +299,41 @@ const AdminsManager = () => {
         [key]: !formData.permissions[key]
       }
     });
+    setSelectedPreset('custom');
+  };
+
+  const applyPreset = (presetName) => {
+    setSelectedPreset(presetName);
+    if (presetName === 'custom') return;
+    
+    setFormData({
+      ...formData,
+      permissions: { ...permissionPresets[presetName] }
+    });
+  };
+
+  const selectAllPermissions = () => {
+    const allTrue = {};
+    Object.keys(formData.permissions).forEach(key => {
+      allTrue[key] = true;
+    });
+    setFormData({
+      ...formData,
+      permissions: allTrue
+    });
+    setSelectedPreset('custom');
+  };
+
+  const deselectAllPermissions = () => {
+    const allFalse = {};
+    Object.keys(formData.permissions).forEach(key => {
+      allFalse[key] = false;
+    });
+    setFormData({
+      ...formData,
+      permissions: allFalse
+    });
+    setSelectedPreset('custom');
   };
 
   if (loading) {
