@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
+import { submitClientTestimonial, getProjectTestimonial, updateClientTestimonial } from '../services/testimonialService';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -26,6 +27,15 @@ export default function EnhancedClientDashboard() {
   const [loadingChat, setLoadingChat] = useState(false);
   const [sendingChat, setSendingChat] = useState(false);
   const chatEndRef = useRef(null);
+  
+  // Testimonial states
+  const [testimonialData, setTestimonialData] = useState(null);
+  const [loadingTestimonial, setLoadingTestimonial] = useState(false);
+  const [testimonialForm, setTestimonialForm] = useState({
+    role: '',
+    message: '',
+    rating: 5
+  });
 
   useEffect(() => {
     const token = localStorage.getItem('client_token');
