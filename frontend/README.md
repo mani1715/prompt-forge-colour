@@ -1,70 +1,167 @@
-# Getting Started with Create React App
+# Frontend - MSPN DEV
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React-based frontend for the MSPN DEV platform.
 
-## Available Scripts
+## 🚀 Quick Start
 
-In the project directory, you can run:
+### Prerequisites
+- Node.js 18+
+- yarn package manager
+- Backend API running on http://localhost:8001
 
-### `npm start`
+### Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **Install dependencies**
+   ```bash
+   yarn install
+   ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. **Configure environment**
+   ```bash
+   cp .env.example .env
+   # Default values work for local development
+   ```
 
-### `npm test`
+3. **Start development server**
+   ```bash
+   yarn start
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. **Access the application**
+   - Frontend: http://localhost:3000
+   - Admin Panel: http://localhost:3000/admin/login
+   - Client Portal: http://localhost:3000/client/login
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📁 Directory Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+frontend/
+├── package.json           # Dependencies & scripts
+├── .nvmrc                 # Node version (18)
+├── .env.example           # Environment template
+├── craco.config.js        # CRACO configuration
+├── tailwind.config.js     # Tailwind CSS config
+├── postcss.config.js      # PostCSS config
+├── jsconfig.json          # JavaScript config
+├── components.json        # shadcn/ui config
+│
+├── public/                # Static assets
+│   ├── index.html
+│   ├── favicon.ico
+│   └── manifest.json
+│
+└── src/
+    ├── App.js             # Main application component
+    ├── App.css            # Global styles
+    ├── index.js           # Entry point
+    ├── index.css          # Base styles
+    │
+    ├── pages/             # Page components
+    │   ├── Home.jsx
+    │   ├── About.jsx
+    │   ├── Services.jsx
+    │   ├── Portfolio.jsx
+    │   ├── BlogList.jsx
+    │   ├── Contact.jsx
+    │   ├── ClientLogin.jsx
+    │   └── ClientDashboard.jsx
+    │
+    ├── components/        # Reusable components
+    │   ├── Navbar.jsx
+    │   ├── Footer.jsx
+    │   ├── ChatWidget.jsx
+    │   └── ui/            # shadcn/ui components
+    │
+    ├── admin/             # Admin panel
+    │   ├── AdminLayout.jsx
+    │   ├── pages/         # Admin pages
+    │   │   ├── Dashboard.jsx
+    │   │   ├── PortfolioManager.jsx
+    │   │   ├── BlogsManager.jsx
+    │   │   ├── ClientsManager.jsx
+    │   │   └── ... (20+ admin pages)
+    │   └── context/       # Admin context
+    │
+    ├── demos/             # Demo showcases
+    │   ├── ecommerce/     # E-commerce demo
+    │   ├── corporate/     # Corporate demo
+    │   ├── lms/           # LMS demo
+    │   ├── restaurant/    # Restaurant demo
+    │   └── ... (8 demos total)
+    │
+    ├── context/           # React Context providers
+    │   ├── CartContext.jsx
+    │   └── AdminContext.jsx
+    │
+    ├── services/          # API service layer
+    │   ├── api.js         # Axios instance
+    │   ├── authService.js
+    │   └── projectService.js
+    │
+    ├── lib/               # Utilities
+    │   └── utils.js
+    │
+    └── data/              # Mock/demo data
+        ├── mock.js
+        ├── ecommerceData.js
+        └── lmsData.js
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🎨 Styling
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Tailwind CSS
+The project uses Tailwind CSS for styling with custom configuration.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### shadcn/ui Components
+Built on Radix UI primitives with 40+ components in `/src/components/ui/`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🔐 Authentication
 
-## Learn More
+Uses React Context API with JWT tokens stored in localStorage.
+Tokens are automatically attached to API requests via axios interceptors.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🌐 API Integration
 
-### Code Splitting
+Centralized API service in `/src/services/api.js` using axios.
+Base URL configured via `REACT_APP_BACKEND_URL` environment variable.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 📦 Key Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- React 19 + React Router v6
+- Tailwind CSS + shadcn/ui
+- Axios for HTTP
+- React Hook Form + Zod validation
+- date-fns, lucide-react
 
-### Making a Progressive Web App
+See `package.json` for complete list.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 🏗️ Building for Production
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+yarn build
+```
 
-### Deployment
+Output in `/build` directory, ready for static hosting.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 📚 Additional Documentation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Main README](/README.md)
+- [Backend README](/backend/README.md)
+
+---
+
+**Last Updated:** December 30, 2025
