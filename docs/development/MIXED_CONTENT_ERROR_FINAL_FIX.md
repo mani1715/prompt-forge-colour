@@ -5,7 +5,7 @@
 **Issue**: Client dashboard was not showing updates made in the admin panel, and the browser was blocking API requests with the following error:
 
 ```
-Mixed Content: The page at 'https://testimonial-app-1.preview.emergentagent.com/client/dashboard' 
+Mixed Content: The page at 'https://mani-code-repo.preview.emergentagent.com/client/dashboard' 
 was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint 
 'http://code-medic-35.preview.emergentagent.com/api/client/projects/'. 
 This request has been blocked; the content must be served over HTTPS.
@@ -51,7 +51,7 @@ api.interceptors.request.use((config) => {
 ### What This Achieves:
 
 ✅ **Development (HTTP)**: API calls use `http://localhost:8001/api/...`
-✅ **Production (HTTPS)**: API calls use `https://testimonial-app-1.preview.emergentagent.com/api/...`
+✅ **Production (HTTPS)**: API calls use `https://mani-code-repo.preview.emergentagent.com/api/...`
 ✅ **Automatic**: No environment variables needed, works everywhere
 ✅ **Secure**: Enforces HTTPS in production automatically
 
@@ -94,8 +94,8 @@ api.interceptors.request.use((config) => {
 
 **Good Output (What You Should See)**:
 ```
-[API] Constructed URL: https://testimonial-app-1.preview.emergentagent.com/api/client/projects
-[API Request] GET https://testimonial-app-1.preview.emergentagent.com/api/client/projects
+[API] Constructed URL: https://mani-code-repo.preview.emergentagent.com/api/client/projects
+[API Request] GET https://mani-code-repo.preview.emergentagent.com/api/client/projects
 ```
 
 **Bad Output (Should NOT see)**:
@@ -144,7 +144,7 @@ In the Network tab, filter by "XHR" or "Fetch":
    host = 'code-medic-35.preview.emergentagent.com'
    
    // Constructs full URL
-   fullUrl = 'https://testimonial-app-1.preview.emergentagent.com/api/client/projects'
+   fullUrl = 'https://mani-code-repo.preview.emergentagent.com/api/client/projects'
    ```
 
 3. **Request is made with HTTPS** ✅
@@ -233,7 +233,7 @@ So changes made in admin panel will appear in client dashboard within:
 
 2. **Test API Directly**:
    ```bash
-   curl -X GET https://testimonial-app-1.preview.emergentagent.com/api/client/projects \
+   curl -X GET https://mani-code-repo.preview.emergentagent.com/api/client/projects \
      -H "Authorization: Bearer YOUR_TOKEN"
    ```
 

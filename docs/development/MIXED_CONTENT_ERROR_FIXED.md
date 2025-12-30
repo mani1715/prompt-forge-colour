@@ -6,7 +6,7 @@ The client dashboard was failing to fetch project updates due to a **Mixed Conte
 
 ### The Specific Error:
 ```
-Mixed Content: The page at 'https://testimonial-app-1.preview.emergentagent.com/client/dashboard' 
+Mixed Content: The page at 'https://mani-code-repo.preview.emergentagent.com/client/dashboard' 
 was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint 
 'http://code-medic-35.preview.emergentagent.com/api/client/projects/'. 
 This request has been blocked; the content must be served over HTTPS.
@@ -59,9 +59,9 @@ Removed unnecessary protocol checking since relative URLs handle it automaticall
 
 ## ✅ How It Works Now
 
-1. **Frontend page loads** over HTTPS: `https://testimonial-app-1.preview.emergentagent.com/client/dashboard`
+1. **Frontend page loads** over HTTPS: `https://mani-code-repo.preview.emergentagent.com/client/dashboard`
 2. **API request is made** with relative URL: `/api/client/projects/`
-3. **Browser automatically constructs** the full URL using the current protocol: `https://testimonial-app-1.preview.emergentagent.com/api/client/projects/`
+3. **Browser automatically constructs** the full URL using the current protocol: `https://mani-code-repo.preview.emergentagent.com/api/client/projects/`
 4. **Kubernetes ingress routes** `/api/*` to backend service
 5. **Backend responds** over HTTPS
 6. **No mixed content error** - everything uses HTTPS
@@ -69,7 +69,7 @@ Removed unnecessary protocol checking since relative URLs handle it automaticall
 ## 🧪 Testing Instructions
 
 ### 1. Open Client Dashboard
-Visit: `https://testimonial-app-1.preview.emergentagent.com/client/dashboard`
+Visit: `https://mani-code-repo.preview.emergentagent.com/client/dashboard`
 
 ### 2. Open Browser Console (F12)
 You should see:

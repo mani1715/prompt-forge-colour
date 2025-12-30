@@ -5,7 +5,7 @@ Users were getting "Mixed Content" errors when trying to add milestones, tasks, 
 
 ### Error Message
 ```
-Mixed Content: The page at 'https://testimonial-app-1.preview.emergentagent.com/admin/client-projects' 
+Mixed Content: The page at 'https://mani-code-repo.preview.emergentagent.com/admin/client-projects' 
 was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint 
 'http://dev-project-hub-2.preview.emergentagent.com/api/admin/client-projects/.../milestones'. 
 This request has been blocked; the content must be served over HTTPS.
@@ -46,14 +46,14 @@ if (backendUrl.startsWith('/')) {
 
 **How it works**:
 - **Local HTTP** (`http://localhost:3000`): Uses `/api` → proxied to `http://localhost:8001/api`
-- **Production HTTPS** (`https://testimonial-app-1.preview.emergentagent.com`): Uses `/api` → converted to `https://testimonial-app-1.preview.emergentagent.com/api`
+- **Production HTTPS** (`https://mani-code-repo.preview.emergentagent.com`): Uses `/api` → converted to `https://mani-code-repo.preview.emergentagent.com/api`
 
 ### 2. Updated Backend CORS (`/app/backend/.env`)
 
 Added the production domain to allowed origins:
 
 ```env
-CORS_ORIGINS=http://localhost:3000,https://testimonial-app-1.preview.emergentagent.com,https://testimonial-app-1.preview.emergentagent.com
+CORS_ORIGINS=http://localhost:3000,https://mani-code-repo.preview.emergentagent.com,https://mani-code-repo.preview.emergentagent.com
 ```
 
 ### 3. Updated Frontend Configuration (`/app/frontend/.env`)
@@ -72,7 +72,7 @@ USE_WEBPACK_PROXY=false
 ## Testing the Fix
 
 ### 1. Admin Login
-- Go to: `https://testimonial-app-1.preview.emergentagent.com/admin/login`
+- Go to: `https://mani-code-repo.preview.emergentagent.com/admin/login`
 - Login with: `admin` / `admin123`
 
 ### 2. Navigate to Client Projects
@@ -165,9 +165,9 @@ When you open the browser console (F12), you should now see:
 ```
 [API Config] Environment: development
 [API Config] REACT_APP_BACKEND_URL: /api
-[API Config] Current origin: https://testimonial-app-1.preview.emergentagent.com
+[API Config] Current origin: https://mani-code-repo.preview.emergentagent.com
 [API Config] Current protocol: https:
-[API Config] ✅ Using absolute HTTPS URL: https://testimonial-app-1.preview.emergentagent.com/api
+[API Config] ✅ Using absolute HTTPS URL: https://mani-code-repo.preview.emergentagent.com/api
 ```
 
 **No more "Mixed Content" errors!**
@@ -215,10 +215,10 @@ When you open the browser console (F12), you should now see:
 
 ### Check Backend CORS
 ```bash
-curl -I http://localhost:8001/api/ -H "Origin: https://testimonial-app-1.preview.emergentagent.com"
+curl -I http://localhost:8001/api/ -H "Origin: https://mani-code-repo.preview.emergentagent.com"
 ```
 
-Should include: `Access-Control-Allow-Origin: https://testimonial-app-1.preview.emergentagent.com`
+Should include: `Access-Control-Allow-Origin: https://mani-code-repo.preview.emergentagent.com`
 
 ### Check Services Status
 ```bash

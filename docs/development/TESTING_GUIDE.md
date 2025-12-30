@@ -2,10 +2,10 @@
 
 ## Access the Application
 
-**Preview URL**: https://testimonial-app-1.preview.emergentagent.com
+**Preview URL**: https://mani-code-repo.preview.emergentagent.com
 
 ## Admin Login Credentials
-- **URL**: https://testimonial-app-1.preview.emergentagent.com/admin/login
+- **URL**: https://mani-code-repo.preview.emergentagent.com/admin/login
 - **Username**: `admin`
 - **Password**: `admin123`
 - ⚠️ **Important**: Change this password after first login!
