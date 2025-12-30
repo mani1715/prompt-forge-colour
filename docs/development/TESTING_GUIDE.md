@@ -2,10 +2,10 @@
 
 ## Access the Application
 
-**Preview URL**: https://dev-code-central.preview.emergentagent.com
+**Preview URL**: https://testimonial-app-1.preview.emergentagent.com
 
 ## Admin Login Credentials
-- **URL**: https://dev-code-central.preview.emergentagent.com/admin/login
+- **URL**: https://testimonial-app-1.preview.emergentagent.com/admin/login
 - **Username**: `admin`
 - **Password**: `admin123`
 - ⚠️ **Important**: Change this password after first login!

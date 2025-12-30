@@ -20,7 +20,7 @@ const getBaseURL = () => {
 };
 
 const api = axios.create({
-  baseURL: getBaseURL(),  // e.g., "https://dev-code-central.preview.emergentagent.com/api"
+  baseURL: getBaseURL(),  // e.g., "https://testimonial-app-1.preview.emergentagent.com/api"
   headers: { 'Content-Type': 'application/json' },
   timeout: 15000
 });
@@ -40,7 +40,7 @@ baseURL: '/api'  // Relative URL - supposed to inherit protocol but didn't work
 **After:**
 ```javascript
 baseURL: getBaseURL()  // Explicit full URL with correct protocol
-// Returns: "https://dev-code-central.preview.emergentagent.com/api" on HTTPS pages
+// Returns: "https://testimonial-app-1.preview.emergentagent.com/api" on HTTPS pages
 // Returns: "http://localhost:3000/api" on local dev
 ```
 
@@ -48,13 +48,13 @@ baseURL: getBaseURL()  // Explicit full URL with correct protocol
 
 ## How It Works
 
-1. **Page Loads**: `https://dev-code-central.preview.emergentagent.com/client/dashboard`
+1. **Page Loads**: `https://testimonial-app-1.preview.emergentagent.com/client/dashboard`
 2. **getBaseURL() Executes**:
    - Reads `window.location.protocol` → `'https:'`
    - Reads `window.location.host` → `'api-secure-update.preview.emergentagent.com'`
-   - Constructs: `'https://dev-code-central.preview.emergentagent.com/api'`
+   - Constructs: `'https://testimonial-app-1.preview.emergentagent.com/api'`
 3. **API Call Made**: `api.get('/client/projects')`
-4. **Full URL**: `https://dev-code-central.preview.emergentagent.com/api/client/projects`
+4. **Full URL**: `https://testimonial-app-1.preview.emergentagent.com/api/client/projects`
 5. **Result**: ✅ HTTPS request from HTTPS page - No Mixed Content error!
 
 ---
@@ -65,8 +65,8 @@ When you open the client dashboard, you should see:
 
 ```
 [API Config] Page protocol: https:
-[API Config] Constructed baseURL: https://dev-code-central.preview.emergentagent.com/api
-[API Request] GET https://dev-code-central.preview.emergentagent.com/api/client/projects
+[API Config] Constructed baseURL: https://testimonial-app-1.preview.emergentagent.com/api
+[API Request] GET https://testimonial-app-1.preview.emergentagent.com/api/client/projects
 ```
 
 **You should NO LONGER see:**
@@ -88,15 +88,15 @@ When you open the client dashboard, you should see:
 - Go to **Console** tab
 
 ### 3. Navigate to Client Dashboard
-- Go to: `https://dev-code-central.preview.emergentagent.com/client/dashboard`
+- Go to: `https://testimonial-app-1.preview.emergentagent.com/client/dashboard`
 - Login if needed
 
 ### 4. Check Console Logs
 Look for these logs (should appear without errors):
 ```
 [API Config] Page protocol: https:
-[API Config] Constructed baseURL: https://dev-code-central.preview.emergentagent.com/api
-[API Request] GET https://dev-code-central.preview.emergentagent.com/api/client/projects
+[API Config] Constructed baseURL: https://testimonial-app-1.preview.emergentagent.com/api
+[API Request] GET https://testimonial-app-1.preview.emergentagent.com/api/client/projects
 ```
 
 ### 5. Check Network Tab

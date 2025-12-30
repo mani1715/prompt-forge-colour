@@ -2,7 +2,7 @@
 
 ## Problem Summary
 The application was experiencing Mixed Content Security Errors where:
-- **Page loaded over**: `https://dev-code-central.preview.emergentagent.com/client/dashboard`
+- **Page loaded over**: `https://testimonial-app-1.preview.emergentagent.com/client/dashboard`
 - **API requests made to**: `http://api-secure-update.preview.emergentagent.com/api/client/projects/`
 - **Browser action**: Blocked insecure HTTP requests from HTTPS page
 
@@ -30,7 +30,7 @@ This prevented the client dashboard from fetching project data and displaying up
 ```env
 MONGODB_URI=mongodb://localhost:27017
 DB_NAME=mspn_dev_db
-CORS_ORIGINS=https://dev-code-central.preview.emergentagent.com,http://localhost:3000
+CORS_ORIGINS=https://testimonial-app-1.preview.emergentagent.com,http://localhost:3000
 SECRET_KEY=mspn-dev-secret-key-production-2024
 PORT=8001
 ```
