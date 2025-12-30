@@ -2,10 +2,10 @@
 
 ## Access the Application
 
-**Preview URL**: https://secure-api-fix-1.preview.emergentagent.com
+**Preview URL**: https://webcode-deploy.preview.emergentagent.com
 
 ## Admin Login Credentials
-- **URL**: https://secure-api-fix-1.preview.emergentagent.com/admin/login
+- **URL**: https://webcode-deploy.preview.emergentagent.com/admin/login
 - **Username**: `admin`
 - **Password**: `admin123`
 - ⚠️ **Important**: Change this password after first login!

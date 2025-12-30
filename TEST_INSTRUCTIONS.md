@@ -9,7 +9,7 @@ The Mixed Content Security Error has been fixed by implementing intelligent prot
 ### 1. Test Client Dashboard (Main Issue)
 
 #### A. Login to Client Portal
-1. Navigate to: `https://secure-api-fix-1.preview.emergentagent.com/client/login`
+1. Navigate to: `https://webcode-deploy.preview.emergentagent.com/client/login`
 2. Use test client credentials (or create a new client from admin panel)
 3. Login successfully
 
@@ -22,12 +22,12 @@ The Mixed Content Security Error has been fixed by implementing intelligent prot
    - ❌ Should NOT see: HTTP URLs in requests
 
 3. **Check Network Tab** (F12 → Network tab)
-   - All requests should be to `https://secure-api-fix-1.preview.emergentagent.com/api/...`
+   - All requests should be to `https://webcode-deploy.preview.emergentagent.com/api/...`
    - ❌ No requests should use `http://` protocol
 
 #### C. Verify Data Syncing
 1. Keep client dashboard open
-2. In another tab, open admin panel: `https://secure-api-fix-1.preview.emergentagent.com/admin/login`
+2. In another tab, open admin panel: `https://webcode-deploy.preview.emergentagent.com/admin/login`
 3. Login with admin credentials:
    - Username: `admin`
    - Password: `admin123`
@@ -47,7 +47,7 @@ The Mixed Content Security Error has been fixed by implementing intelligent prot
 ### 2. Test Admin Panel Features
 
 #### A. Login
-1. Navigate to: `https://secure-api-fix-1.preview.emergentagent.com/admin/login`
+1. Navigate to: `https://webcode-deploy.preview.emergentagent.com/admin/login`
 2. Login with:
    - Username: `admin`
    - Password: `admin123`
@@ -75,7 +75,7 @@ Check these sections work without Mixed Content errors:
 ### 3. Test Public Pages
 
 #### A. Home Page
-1. Navigate to: `https://secure-api-fix-1.preview.emergentagent.com/`
+1. Navigate to: `https://webcode-deploy.preview.emergentagent.com/`
 2. ✅ Page loads correctly
 3. ✅ No console errors
 
@@ -117,9 +117,9 @@ Test a few demo pages to ensure they work:
 
 ### ✅ Good Signs (What You Should See)
 ```
-[API Config] Base URL constructed: https://secure-api-fix-1.preview.emergentagent.com/api
-[API Request] GET /client/projects Base: https://secure-api-fix-1.preview.emergentagent.com/api
-[API Request] POST /admin/clients Base: https://secure-api-fix-1.preview.emergentagent.com/api
+[API Config] Base URL constructed: https://webcode-deploy.preview.emergentagent.com/api
+[API Request] GET /client/projects Base: https://webcode-deploy.preview.emergentagent.com/api
+[API Request] POST /admin/clients Base: https://webcode-deploy.preview.emergentagent.com/api
 ```
 
 ### ❌ Bad Signs (What You Should NOT See)
@@ -175,13 +175,13 @@ If you still see Mixed Content errors:
 ## 🔐 Test Credentials
 
 ### Admin Login
-- URL: `https://secure-api-fix-1.preview.emergentagent.com/admin/login`
+- URL: `https://webcode-deploy.preview.emergentagent.com/admin/login`
 - Username: `admin`
 - Password: `admin123`
 - ⚠️ **IMPORTANT**: Change this password after testing!
 
 ### Client Login
-- URL: `https://secure-api-fix-1.preview.emergentagent.com/client/login`
+- URL: `https://webcode-deploy.preview.emergentagent.com/client/login`
 - Create a client account from admin panel first
 - Use those credentials to test client dashboard
 
