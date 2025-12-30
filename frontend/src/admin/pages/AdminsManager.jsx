@@ -226,6 +226,7 @@ const AdminsManager = () => {
   const openModal = (admin = null) => {
     if (admin) {
       setEditingAdmin(admin);
+      setSelectedPreset('custom');
       setFormData({
         username: admin.username,
         password: '',
@@ -255,6 +256,7 @@ const AdminsManager = () => {
       });
     } else {
       setEditingAdmin(null);
+      setSelectedPreset('custom');
       setFormData({
         username: '',
         password: '',
