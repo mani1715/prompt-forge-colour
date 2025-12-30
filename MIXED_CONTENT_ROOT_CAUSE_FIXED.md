@@ -87,7 +87,7 @@ MONGODB_URI=mongodb://localhost:27017
 DB_NAME=mspn_dev_db
 
 # CORS Configuration  
-CORS_ORIGINS=https://webdev-build.preview.emergentagent.com,http://localhost:3000
+CORS_ORIGINS=https://secure-network-10.preview.emergentagent.com,http://localhost:3000
 
 # Security
 SECRET_KEY=huD_irhIAeS1Apts1CZ29F0B4szR6ZJF3dZZ7geSeFc
@@ -191,13 +191,13 @@ app.add_middleware(ProxyHeaderMiddleware)
 
 ### Request Flow (HTTPS Production Environment)
 
-1. **User loads page**: `https://webdev-build.preview.emergentagent.com/client/dashboard`
+1. **User loads page**: `https://secure-network-10.preview.emergentagent.com/client/dashboard`
    - Browser loads React app over HTTPS ✅
 
 2. **Frontend makes API call**: 
    - Axios uses `baseURL: "/api"` from environment variable
    - Relative URL inherits page protocol
-   - Request: `https://webdev-build.preview.emergentagent.com/api/client/projects`
+   - Request: `https://secure-network-10.preview.emergentagent.com/api/client/projects`
    - Same-origin request (no Mixed Content) ✅
 
 3. **Kubernetes Ingress receives request**:
@@ -290,7 +290,7 @@ curl -i -H "X-Forwarded-Proto: https" \
 
 ### 6. Browser Testing Checklist
 
-When you access: `https://webdev-build.preview.emergentagent.com/client/dashboard`
+When you access: `https://secure-network-10.preview.emergentagent.com/client/dashboard`
 
 **Expected Results**:
 
@@ -309,7 +309,7 @@ When you access: `https://webdev-build.preview.emergentagent.com/client/dashboar
 ```
 
 **Check Network Tab**:
-- Request URL should be: `https://webdev-build.preview.emergentagent.com/api/client/projects`
+- Request URL should be: `https://secure-network-10.preview.emergentagent.com/api/client/projects`
 - Status: `200 OK`
 - Protocol: `https`
 
@@ -385,7 +385,7 @@ secrets.token_urlsafe(32)
 ### CORS Configuration
 
 Currently allows:
-- `https://webdev-build.preview.emergentagent.com` (production)
+- `https://secure-network-10.preview.emergentagent.com` (production)
 - `http://localhost:3000` (local development)
 
 Add more origins as needed, separated by commas.

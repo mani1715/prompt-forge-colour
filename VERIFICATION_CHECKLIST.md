@@ -7,7 +7,7 @@
 - Go to the **Console** tab
 
 ### 2. Navigate to Client Dashboard
-- Go to: `https://webdev-build.preview.emergentagent.com/client/dashboard`
+- Go to: `https://secure-api-fix-1.preview.emergentagent.com/client/dashboard`
 - Or your actual HTTPS URL
 
 ### 3. Check Console Logs (MOST IMPORTANT)
