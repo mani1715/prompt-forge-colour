@@ -755,17 +755,92 @@ const AdminsManager = () => {
                 </select>
               </div>
 
+              {/* Permission Preset Selection */}
+              <div className="admin-form-group" style={{ marginBottom: '20px' }}>
+                <label 
+                  htmlFor="permission-preset"
+                  style={{ 
+                    display: 'block',
+                    marginBottom: '8px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#374151'
+                  }}
+                >
+                  Permission Preset
+                </label>
+                <select
+                  id="permission-preset"
+                  value={selectedPreset}
+                  onChange={(e) => applyPreset(e.target.value)}
+                  data-testid="permission-preset-select"
+                  style={{
+                    width: '100%',
+                    padding: '12px 16px',
+                    fontSize: '15px',
+                    border: '2px solid #E5E7EB',
+                    borderRadius: '8px',
+                    background: 'white',
+                    cursor: 'pointer',
+                    outline: 'none'
+                  }}
+                >
+                  <option value="custom">🎯 Custom (Select individually)</option>
+                  <option value="super_admin">👑 Super Admin (All permissions)</option>
+                  <option value="editor">✍️ Editor (Content management)</option>
+                  <option value="moderator">🛡️ Moderator (Communication & moderation)</option>
+                  <option value="viewer">👁️ Viewer (Read-only access)</option>
+                </select>
+                <p style={{ fontSize: '12px', color: '#6B7280', marginTop: '6px', marginBottom: 0 }}>
+                  Quick presets to assign common permission sets
+                </p>
+              </div>
+
               {/* Permissions */}
               <div className="admin-form-group" style={{ marginBottom: '20px' }}>
-                <label style={{ 
-                  display: 'block',
-                  marginBottom: '12px',
-                  fontSize: '14px',
-                  fontWeight: '600',
-                  color: '#374151'
-                }}>
-                  Permissions
-                </label>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                  <label style={{ 
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#374151'
+                  }}>
+                    Permissions
+                  </label>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <button
+                      type="button"
+                      onClick={selectAllPermissions}
+                      style={{
+                        padding: '6px 12px',
+                        fontSize: '12px',
+                        fontWeight: '500',
+                        border: '1px solid #D1D5DB',
+                        borderRadius: '6px',
+                        background: 'white',
+                        color: '#374151',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Select All
+                    </button>
+                    <button
+                      type="button"
+                      onClick={deselectAllPermissions}
+                      style={{
+                        padding: '6px 12px',
+                        fontSize: '12px',
+                        fontWeight: '500',
+                        border: '1px solid #D1D5DB',
+                        borderRadius: '6px',
+                        background: 'white',
+                        color: '#374151',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Deselect All
+                    </button>
+                  </div>
+                </div>
                 
                 {/* Admin Management */}
                 <div style={{ marginBottom: '16px' }}>
