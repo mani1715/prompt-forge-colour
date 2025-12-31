@@ -35,7 +35,7 @@ const Login = () => {
       localStorage.setItem('admin_token', response.data.token);
       localStorage.setItem('admin_user', JSON.stringify(response.data.admin));
       
-      // Use window.location for a full page reload to ensure clean state
+      // Full reload to ensure clean admin state
       window.location.href = '/admin';
     } catch (err) {
       console.error('Login error:', err);
@@ -64,13 +64,10 @@ const Login = () => {
       }}>
         {/* MSPN DEV Logo */}
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <div style={{
-            display: 'inline-block',
-            marginBottom: '16px'
-          }}>
-            <img 
-              src="/mspn-logo-transparent.png" 
-              alt="MSPN DEV Logo" 
+          <div style={{ display: 'inline-block', marginBottom: '16px' }}>
+            <img
+              src="/mspn-logo-transparent.png"
+              alt="MSPN DEV Logo"
               style={{
                 height: '80px',
                 width: 'auto',
@@ -89,21 +86,6 @@ const Login = () => {
             color: '#6B7280',
             margin: 0
           }}>Sign in to manage your website</p>
-        </div>
-
-        {/* Demo Credentials */}
-        <div style={{
-          background: 'rgba(124, 92, 255, 0.05)',
-          border: '1px solid rgba(124, 92, 255, 0.2)',
-          borderRadius: '8px',
-          padding: '12px',
-          marginBottom: '24px',
-          fontSize: '13px',
-          color: '#7C5CFF'
-        }}>
-          <strong>Demo Credentials:</strong><br />
-          Username: admin<br />
-          Password: admin123
         </div>
 
         {/* Error Message */}
@@ -130,7 +112,7 @@ const Login = () => {
             <input
               type="text"
               className="admin-form-input"
-              placeholder="admin"
+              placeholder="Enter your username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
