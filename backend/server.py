@@ -1,13 +1,10 @@
 from fastapi import FastAPI, APIRouter
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
-from starlette.middleware.trustedhost import TrustedHostMiddleware
 import os
 import logging
 from pathlib import Path
 from database import close_db_connection
-import asyncio
-import subprocess
 
 # Import all routers
 from routes import (
@@ -31,11 +28,13 @@ from routes import (
 from routes.contact_page import router as contact_page_router
 from routes.testimonials import router as testimonials_router
 from routes.pricing import router as pricing_router
+
 # Client Portal Routers
 from routes.client_auth import router as client_auth_router
 from routes.admin_clients import router as admin_clients_router
 from routes.admin_client_projects import router as admin_client_projects_router
 from routes.client_projects import router as client_projects_router
+
 # Booking Routers
 from routes.bookings import router as bookings_router
 from routes.booking_settings import router as booking_settings_router
@@ -43,108 +42,54 @@ from routes.booking_settings import router as booking_settings_router
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# Configure logging early in the application lifecycle
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
 
-# =============================================================================
-# RENDER DEPLOYMENT CONFIGURATION
-# =============================================================================
-# Render will provide the PORT environment variable automatically
-# For local development, it defaults to 8001
-# 
-# START COMMAND FOR RENDER:
-# uvicorn server:app --host 0.0.0.0 --port $PORT
-#
-# This allows the application to:
-# 1. Bind to all network interfaces (0.0.0.0)
-# 2. Use the port provided by Render's environment
-# 3. Work seamlessly in both development and production
-# =============================================================================
-
 PORT = int(os.environ.get("PORT", 8001))
 
-# Create the main app without a prefix
 app = FastAPI(
     title="MSPN DEV API",
     description="Backend API for MSPN DEV website and admin panel",
     version="1.0.0",
-    # CRITICAL: Trust proxy headers for HTTPS detection
-    # This is required for Kubernetes/Nginx ingress deployments
     root_path="/api" if os.environ.get("TRUST_PROXY") == "true" else ""
 )
 
-# =============================================================================
-# PROXY TRUST CONFIGURATION (CRITICAL FOR HTTPS)
-# =============================================================================
-# When behind a reverse proxy (Kubernetes ingress, Nginx, etc.):
-# - The proxy terminates SSL/TLS (HTTPS)
-# - Backend receives plain HTTP requests
-# - Proxy adds X-Forwarded-* headers to indicate original protocol
-# 
-# FastAPI needs to trust these headers to:
-# 1. Generate correct URLs in responses (https:// not http://)
-# 2. Handle redirects properly
-# 3. Avoid Mixed Content errors in frontend
-# =============================================================================
-
-# Middleware to trust proxy headers
+# -------------------------------------------------------------------
+# Proxy Header Middleware
+# -------------------------------------------------------------------
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 
 class ProxyHeaderMiddleware(BaseHTTPMiddleware):
-    """
-    Middleware to handle X-Forwarded-* headers from reverse proxy
-    This ensures FastAPI recognizes HTTPS requests correctly
-    """
     async def dispatch(self, request: Request, call_next):
-        # Check for X-Forwarded-Proto header (indicates original protocol)
         forwarded_proto = request.headers.get("X-Forwarded-Proto")
         if forwarded_proto:
-            # Update the request scope to reflect the original protocol
             request.scope["scheme"] = forwarded_proto
-            logger.debug(f"🔒 Request protocol updated to: {forwarded_proto}")
-        
-        # Check for X-Forwarded-Host header (indicates original host)
+
         forwarded_host = request.headers.get("X-Forwarded-Host")
         if forwarded_host:
             request.scope["server"] = (forwarded_host, None)
-            logger.debug(f"🌐 Request host updated to: {forwarded_host}")
-        
-        response = await call_next(request)
-        return response
 
-# Add proxy header middleware FIRST (before CORS)
+        return await call_next(request)
+
 app.add_middleware(ProxyHeaderMiddleware)
-logger.info("✅ Proxy header middleware enabled - trusting X-Forwarded-Proto and X-Forwarded-Host")
 
-# Create a router with the /api prefix
+# -------------------------------------------------------------------
+# Routers
+# -------------------------------------------------------------------
 api_router = APIRouter(prefix="/api")
 
-# =============================================================================
-# ROOT HEALTH CHECK ENDPOINT (Required by Render)
-# =============================================================================
-# Render uses this endpoint to verify that the service is running correctly
-# This must return a 200 OK status for the health check to pass
-# =============================================================================
 @app.get("/")
 async def health_check():
-    """Root health check endpoint for Render deployment monitoring"""
-    return {
-        "status": "healthy",
-        "service": "MSPN DEV API",
-        "message": "Backend is running successfully"
-    }
+    return {"status": "healthy", "service": "MSPN DEV API"}
 
-# Health check endpoint under /api prefix (for backward compatibility)
 @api_router.get("/")
 async def root():
-    return {"message": "MSPN DEV API is running", "status": "healthy"}
+    return {"message": "MSPN DEV API is running"}
 
-# Include all routers
 api_router.include_router(auth_router)
 api_router.include_router(pages_router)
 api_router.include_router(services_router)
@@ -160,188 +105,76 @@ api_router.include_router(about_router)
 api_router.include_router(contact_page_router)
 api_router.include_router(chat_router)
 api_router.include_router(blogs_router)
-api_router.include_router(testimonials_router, prefix="/testimonials", tags=["testimonials"])
+api_router.include_router(testimonials_router, prefix="/testimonials")
 api_router.include_router(newsletter_router)
 api_router.include_router(pricing_router)
 api_router.include_router(analytics_router)
-# Client Portal Routers
+
 api_router.include_router(client_auth_router)
 api_router.include_router(admin_clients_router)
 api_router.include_router(admin_client_projects_router)
 api_router.include_router(client_projects_router)
-# Booking Routers
+
 api_router.include_router(bookings_router)
 api_router.include_router(booking_settings_router)
 
-# Include the main API router in the app
 app.include_router(api_router)
 
-# =============================================================================
-# CORS CONFIGURATION (Production-Ready)
-# =============================================================================
-# CORS (Cross-Origin Resource Sharing) is configured via environment variable
-# to support deployment where frontend and backend are on different domains
-#
-# DEVELOPMENT: CORS_ORIGINS=http://localhost:3000
-# PRODUCTION:  CORS_ORIGINS=https://your-frontend.vercel.app,https://www.yourdomain.com
-#
-# Multiple origins can be specified by separating them with commas
-# =============================================================================
-
-cors_origins_env = os.environ.get('CORS_ORIGINS', '')
-
-# Parse CORS origins from environment variable
-if cors_origins_env:
-    # Split by comma and strip whitespace
-    allow_origins = [origin.strip() for origin in cors_origins_env.split(',') if origin.strip()]
-    if not allow_origins:
-        # If parsing resulted in empty list, use wildcard (not recommended for production)
-        logger.warning("⚠️  CORS_ORIGINS is set but empty. Using wildcard '*' (not secure for production)")
-        allow_origins = ["*"]
-        allow_credentials = False
-    else:
-        logger.info(f"✅ CORS enabled for origins: {', '.join(allow_origins)}")
-        allow_credentials = True
-else:
-    # Default to wildcard for local development (should be changed for production)
-    logger.warning("⚠️  CORS_ORIGINS not set. Using wildcard '*' (not secure for production)")
-    allow_origins = ["*"]
-    allow_credentials = False
+# -------------------------------------------------------------------
+# CORS
+# -------------------------------------------------------------------
+cors_origins_env = os.environ.get("CORS_ORIGINS", "")
+allow_origins = [o.strip() for o in cors_origins_env.split(",") if o.strip()] or ["*"]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allow_origins,
-    allow_credentials=allow_credentials,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# -------------------------------------------------------------------
+# Startup Initialization
+# -------------------------------------------------------------------
 @app.on_event("startup")
 async def startup_event():
-    """Initialize admin and default data on startup"""
     try:
-        logger.info("🚀 Starting application initialization...")
-        
-        # Run auto-initialization for portfolio and services
         from auto_init import auto_initialize_database
         await auto_initialize_database()
-        
+
         from database import admins_collection, contact_page_collection
         from auth.password import hash_password
         import uuid
         from datetime import datetime
-        
-        # Initialize Super Admin
+
         logger.info("Checking for super admin...")
-        
+
         existing_admin = await admins_collection.find_one({"role": "super_admin"})
-        
+
         if not existing_admin:
-            # Create default super admin
             admin_user = {
                 "id": str(uuid.uuid4()),
-                "username": "admin",
-                "password_hash": hash_password("admin123"),
+                "username": "maneesh",
+                "password_hash": hash_password("maneesh123"),
                 "role": "super_admin",
-                "permissions": {
-                    "canManageAdmins": True,
-                    "canManageAbout": True,
-                    "canManagePortfolio": True,
-                    "canManageBlogs": True,
-                    "canManageTestimonials": True,
-                    "canManageDemos": True,
-                    "canViewContacts": True,
-                    "canManageContactPage": True,
-                    "canManageChat": True,
-                    "canManageNewsletter": True,
-                    "canManageBookings": True,
-                    "canManageBookingSettings": True,
-                    "canManagePricing": True,
-                    "canViewAnalytics": True,
-                    "canManageClients": True,
-                    "canManageClientProjects": True,
-                    "canAccessStorage": True,
-                    "canManageNotes": True,
-                    "canManageSettings": True,
-                    "canViewPrivateProjects": True
-                },
+                "permissions": {"canManageAdmins": True},
                 "created_at": datetime.utcnow().isoformat(),
                 "created_by": "system"
             }
-            
+
             await admins_collection.insert_one(admin_user)
+
             logger.info("✅ Super admin created successfully!")
-            logger.info("   Username: admin")
-            logger.info("   Password: admin123")
-            logger.info("   ⚠️  IMPORTANT: Change this password after first login!")
+            logger.info("   Username: maneesh")
+            logger.info("   Password: maneesh123")
+            logger.info("   ⚠️  Change this password after login!")
+
         else:
             logger.info("✅ Super admin already exists")
-        
-        # Initialize Contact Page Data
-        logger.info("Checking for contact page data...")
-        
-        existing_contact_page = await contact_page_collection.find_one()
-        
-        if not existing_contact_page:
-            # Import the default contact content function
-            from routes.contact_page import get_default_contact_content
-            
-            default_contact = get_default_contact_content()
-            default_contact['created_at'] = datetime.utcnow().isoformat()
-            default_contact['created_by'] = 'system'
-            
-            await contact_page_collection.insert_one(default_contact)
-            logger.info("✅ Contact page initialized with default content!")
-        else:
-            logger.info("✅ Contact page data already exists")
-        
-        # Initialize Booking Settings
-        logger.info("Checking for booking settings...")
-        
-        from database import booking_settings_collection
-        import pytz
-        
-        existing_booking_settings = await booking_settings_collection.find_one({})
-        
-        if not existing_booking_settings:
-            IST = pytz.timezone('Asia/Kolkata')
-            now = datetime.now(IST).isoformat()
-            
-            default_booking_settings = {
-                "id": str(uuid.uuid4()),
-                "available_days": [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday"
-                ],
-                "time_slots": [
-                    {"start_time": "10:00", "end_time": "11:00", "max_bookings": 1},
-                    {"start_time": "11:00", "end_time": "12:00", "max_bookings": 1},
-                    {"start_time": "14:00", "end_time": "15:00", "max_bookings": 1},
-                    {"start_time": "15:00", "end_time": "16:00", "max_bookings": 1},
-                    {"start_time": "16:00", "end_time": "17:00", "max_bookings": 1}
-                ],
-                "meeting_type": "Google Meet",
-                "timezone": "Asia/Kolkata",
-                "is_active": True,
-                "created_at": now,
-                "updated_at": now
-            }
-            
-            await booking_settings_collection.insert_one(default_booking_settings)
-            logger.info("✅ Booking settings initialized with default configuration!")
-            logger.info("   Available Days: Monday - Friday")
-            logger.info("   Time Slots: 10:00-17:00 (IST)")
-            logger.info("   Meeting Type: Google Meet")
-        else:
-            logger.info("✅ Booking settings already exist")
-        
-        logger.info("✅ Application initialization complete!")
-        
+
     except Exception as e:
-        logger.warning(f"Could not initialize data: {str(e)}")
+        logger.warning(f"Startup initialization failed: {e}")
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
