@@ -4,7 +4,7 @@
 
 **Issue**: Browser blocking HTTP requests from HTTPS page
 ```
-Mixed Content: The page at 'https://build-helper-16.preview.emergentagent.com/client/dashboard' 
+Mixed Content: The page at 'https://dev-portfolio-977.preview.emergentagent.com/client/dashboard' 
 was loaded over HTTPS, but requested 'http://...api/client/projects/'. 
 This request has been blocked.
 ```
