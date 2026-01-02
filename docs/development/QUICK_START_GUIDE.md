@@ -2,10 +2,10 @@
 
 ## 🚀 Access Your Application
 
-**Live URL:** https://dev-portfolio-977.preview.emergentagent.com
+**Live URL:** https://build-helper-16.preview.emergentagent.com
 
 ### Admin Panel Login
-**URL:** https://dev-portfolio-977.preview.emergentagent.com/admin/login
+**URL:** https://build-helper-16.preview.emergentagent.com/admin/login
 
 ```
 Username: admin
@@ -315,9 +315,9 @@ Your portfolio management system is now fully operational with:
 ---
 
 **Quick Links:**
-- Admin Login: https://dev-portfolio-977.preview.emergentagent.com/admin/login
-- Client Login: https://dev-portfolio-977.preview.emergentagent.com/client/login
-- Main Site: https://dev-portfolio-977.preview.emergentagent.com
+- Admin Login: https://build-helper-16.preview.emergentagent.com/admin/login
+- Client Login: https://build-helper-16.preview.emergentagent.com/client/login
+- Main Site: https://build-helper-16.preview.emergentagent.com
 
 **Documentation:**
 - Full fix details: `/app/MIXED_CONTENT_FIX_COMPLETE.md`

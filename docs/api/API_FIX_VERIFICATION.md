@@ -66,9 +66,9 @@ Status: ✓ Works (HTTP → HTTP)
 
 #### Production Environment (HTTPS):
 ```
-Page: https://dev-portfolio-977.preview.emergentagent.com/client/dashboard
+Page: https://build-helper-16.preview.emergentagent.com/client/dashboard
 API Call: /client/projects
-Result: https://dev-portfolio-977.preview.emergentagent.com/api/client/projects
+Result: https://build-helper-16.preview.emergentagent.com/api/client/projects
 Status: ✓ Works (HTTPS → HTTPS) ← THIS WAS THE ISSUE
 ```
 
@@ -76,8 +76,8 @@ Status: ✓ Works (HTTPS → HTTPS) ← THIS WAS THE ISSUE
 
 **In Production (HTTPS)**:
 ```javascript
-[API] Constructed URL: https://dev-portfolio-977.preview.emergentagent.com/api/client/projects
-[API Request] GET https://dev-portfolio-977.preview.emergentagent.com/api/client/projects
+[API] Constructed URL: https://build-helper-16.preview.emergentagent.com/api/client/projects
+[API Request] GET https://build-helper-16.preview.emergentagent.com/api/client/projects
 ```
 
 **What You Should NOT See**:
@@ -91,7 +91,7 @@ Status: ✓ Works (HTTPS → HTTPS) ← THIS WAS THE ISSUE
 To verify the fix is working in your browser:
 
 #### 1. Open Client Dashboard
-- [ ] Navigate to: `https://dev-portfolio-977.preview.emergentagent.com/client/dashboard`
+- [ ] Navigate to: `https://build-helper-16.preview.emergentagent.com/client/dashboard`
 - [ ] Login with: `john@acmecorp.com` / `client123`
 
 #### 2. Check Browser Console (F12)
@@ -171,7 +171,7 @@ The client dashboard will automatically refresh and show updates:
 
 The Mixed Content Error has been fixed by implementing dynamic URL construction that automatically matches the current page's protocol. All services are running, backend is responding correctly, and the code is ready for testing.
 
-**Next Step**: Please test in your browser at `https://dev-portfolio-977.preview.emergentagent.com` and verify:
+**Next Step**: Please test in your browser at `https://build-helper-16.preview.emergentagent.com` and verify:
 1. No mixed content errors in console
 2. Client dashboard loads data successfully
 3. Updates from admin panel appear in client dashboard
