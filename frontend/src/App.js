@@ -53,6 +53,11 @@ import LmsHome from './demos/lms/LmsHome';
 import LmsCourses from './demos/lms/LmsCourses';
 import LmsCourseDetail from './demos/lms/LmsCourseDetail';
 
+// Real Estate Demo Pages
+import RealEstateHome from './demos/real-estate/RealEstateHome';
+import RealEstateListings from './demos/real-estate/RealEstateListings';
+import RealEstatePropertyDetail from './demos/real-estate/RealEstatePropertyDetail';
+
 // Admin Pages
 import AdminLogin from './admin/pages/Login';
 import AdminLayout from './admin/AdminLayout';
