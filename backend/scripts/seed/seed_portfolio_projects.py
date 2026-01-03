@@ -65,7 +65,7 @@ PORTFOLIO_PROJECTS = [
         "tech_stack": ["React", "Node.js", "MongoDB", "Stripe", "Socket.io"],
         "featured": True,
         "is_private": False,
-        "live_demo_url": "/demo/restaurant",
+        "live_demo_url": "/demo/restaurant-booking",
         "case_study_content": "Created an intuitive restaurant platform with real-time order tracking and seamless payment processing.",
         "status": "completed",
         "created_at": datetime.utcnow().isoformat(),
