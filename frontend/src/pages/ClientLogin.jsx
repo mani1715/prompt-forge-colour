@@ -61,7 +61,7 @@ export default function ClientLogin() {
           <div className="mx-auto w-20 h-20 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform p-2">
             <img 
               src="/mspn-logo-transparent.png" 
-              alt="MSPN Logo" 
+              alt="Prompt Forge Logo" 
               className="w-full h-full object-contain"
             />
           </div>
