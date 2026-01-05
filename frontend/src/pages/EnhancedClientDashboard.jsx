@@ -298,7 +298,7 @@ export default function EnhancedClientDashboard() {
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg p-2">
                 <img 
-                  src="/promptforge-logo-transparent.png" 
+                  src="/prompt-forge-logo.png" 
                   alt="Prompt Forge Logo" 
                   style={{
                     width: '100%',
