@@ -8,7 +8,7 @@ class WebsiteContent(BaseModel):
     
     # Hero Section
     hero_headline: str = "Build Your Dream Website"
-    hero_subheadline: str = "MSPN DEV Web Development Solutions"
+    hero_subheadline: str = "Prompt Forge Web Development Solutions"
     hero_description: str = "Transform your vision into stunning reality with our premium web development services."
     hero_cta1_text: str = "Start Your Project"
     hero_cta2_text: str = "View Our Work"
@@ -44,7 +44,7 @@ class WebsiteContent(BaseModel):
     cta_button_text: str = "Get in Touch"
     
     # About Page
-    about_title: str = "About MSPN DEV"
+    about_title: str = "About Prompt Forge"
     about_description: str = "We are a team of passionate developers and designers."
     about_mission: str = "Our mission is to create exceptional digital experiences."
     about_vision: str = "Our vision is to be the leading web development agency."

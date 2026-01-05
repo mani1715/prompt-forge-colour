@@ -1,4 +1,4 @@
-# MSPN DEV - Portfolio & Business Management Platform
+# Prompt Forge - Portfolio & Business Management Platform
 
 A comprehensive full-stack agency portfolio and business management platform built with FastAPI, React, and MongoDB.
 

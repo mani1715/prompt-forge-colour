@@ -51,8 +51,8 @@ logger = logging.getLogger(__name__)
 PORT = int(os.environ.get("PORT", 8001))
 
 app = FastAPI(
-    title="MSPN DEV API",
-    description="Backend API for MSPN DEV website and admin panel",
+    title="Prompt Forge API",
+    description="Backend API for Prompt Forge website and admin panel",
     version="1.0.0",
     root_path="/api" if os.environ.get("TRUST_PROXY") == "true" else ""
 )
@@ -101,11 +101,11 @@ api_router = APIRouter(prefix="/api")
 
 @app.get("/")
 async def health_check():
-    return {"status": "healthy", "service": "MSPN DEV API"}
+    return {"status": "healthy", "service": "Prompt Forge API"}
 
 @api_router.get("/")
 async def root():
-    return {"message": "MSPN DEV API is running"}
+    return {"message": "Prompt Forge API is running"}
 
 api_router.include_router(auth_router)
 api_router.include_router(pages_router)

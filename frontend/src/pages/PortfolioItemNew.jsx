@@ -19,7 +19,7 @@ const PortfolioItem = () => {
     return (
       <>
         <Helmet>
-          <title>Project Not Found - MSPN DEV</title>
+          <title>Project Not Found - Prompt Forge</title>
         </Helmet>
         <div className="portfolio-item-page-premium">
           <div className="not-found-container">
@@ -53,7 +53,7 @@ const PortfolioItem = () => {
     "image": project.image,
     "author": {
       "@type": "Organization",
-      "name": "MSPN DEV"
+      "name": "Prompt Forge"
     },
     "datePublished": project.date,
     "keywords": project.technologies.join(', ')
@@ -63,7 +63,7 @@ const PortfolioItem = () => {
     <>
       {/* SEO Meta Tags */}
       <Helmet>
-        <title>{project.seo?.title || `${project.title} - MSPN DEV Portfolio`}</title>
+        <title>{project.seo?.title || `${project.title} - Prompt Forge Portfolio`}</title>
         <meta name="description" content={project.seo?.description || project.description} />
         <meta name="keywords" content={project.technologies.join(', ')} />
         <link rel="canonical" href={`https://mspndev.com/portfolio/${project.slug || project.id}`} />

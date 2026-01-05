@@ -1,4 +1,4 @@
-# 🚀 Vercel Deployment Guide - MSPN DEV Frontend
+# 🚀 Vercel Deployment Guide - Prompt Forge Frontend
 
 ## ✅ Production Readiness Status
 
@@ -108,7 +108,7 @@ curl https://your-backend-name.onrender.com/
 # Expected response:
 # {
 #   "status": "healthy",
-#   "service": "MSPN DEV API",
+#   "service": "Prompt Forge API",
 #   "message": "Backend is running successfully"
 # }
 

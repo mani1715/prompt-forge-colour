@@ -1,6 +1,6 @@
-# Frontend - MSPN DEV
+# Frontend - Prompt Forge
 
-React-based frontend for the MSPN DEV platform.
+React-based frontend for the Prompt Forge platform.
 
 ## 🚀 Quick Start
 

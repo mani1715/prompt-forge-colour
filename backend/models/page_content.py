@@ -16,7 +16,7 @@ class PageContent(BaseModel):
                 "page": "home",
                 "section": "hero",
                 "content": {
-                    "title": "Welcome to MSPN DEV",
+                    "title": "Welcome to Prompt Forge",
                     "description": "Professional web development agency"
                 },
                 "visible": True

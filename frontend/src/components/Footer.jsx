@@ -65,7 +65,7 @@ const Footer = () => {
 
   const handleWhatsAppClick = () => {
     if (whatsappNumber) {
-      const message = encodeURIComponent("Hi MSPN DEV, I'm interested in your services.");
+      const message = encodeURIComponent("Hi Prompt Forge, I'm interested in your services.");
       window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${message}`, '_blank');
     }
   };
@@ -80,7 +80,7 @@ const Footer = () => {
             <div style={{ marginBottom: '16px' }}>
               <img 
                 src="/mspn-logo-transparent.png" 
-                alt="MSPN DEV Logo" 
+                alt="Prompt Forge Logo" 
                 style={{
                   height: '70px',
                   width: 'auto',

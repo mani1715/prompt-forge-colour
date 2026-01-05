@@ -32,7 +32,7 @@ const Navbar = () => {
         }}>
           <img 
             src="/mspn-logo-transparent.png" 
-            alt="MSPN DEV Logo" 
+            alt="Prompt Forge Logo" 
             style={{
               height: '50px',
               width: 'auto',

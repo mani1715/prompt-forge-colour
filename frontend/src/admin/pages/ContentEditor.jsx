@@ -124,7 +124,7 @@ const ContentEditor = () => {
                 type="text"
                 value={content.hero_subheadline || ''}
                 onChange={(e) => handleChange('hero_subheadline', e.target.value)}
-                placeholder="MSPN DEV Web Development Solutions"
+                placeholder="Prompt Forge Web Development Solutions"
               />
             </div>
             <div className="content-field">
@@ -407,7 +407,7 @@ const ContentEditor = () => {
                 type="text"
                 value={content.about_title || ''}
                 onChange={(e) => handleChange('about_title', e.target.value)}
-                placeholder="About MSPN DEV"
+                placeholder="About Prompt Forge"
               />
             </div>
             <div className="content-field">

@@ -155,11 +155,11 @@ const Portfolio = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "MSPN DEV Portfolio",
+    "name": "Prompt Forge Portfolio",
     "description": "Explore our portfolio of web development projects including e-commerce platforms, dashboards, and custom web applications.",
     "provider": {
       "@type": "Organization",
-      "name": "MSPN DEV",
+      "name": "Prompt Forge",
       "url": "https://mspndev.com"
     },
     "hasPart": portfolioProjects.map(project => ({
@@ -187,9 +187,9 @@ const Portfolio = () => {
     <>
       {/* SEO Meta Tags */}
       <Helmet>
-        <title>Portfolio - MSPN DEV | Web Development Projects</title>
-        <meta name="description" content="Explore MSPN DEV's portfolio of web development projects including e-commerce platforms, web applications, dashboards, and UI/UX design work. View live demos and case studies." />
-        <meta name="keywords" content="web development portfolio, react projects, e-commerce websites, web applications, MSPN DEV projects" />
+        <title>Portfolio - Prompt Forge | Web Development Projects</title>
+        <meta name="description" content="Explore Prompt Forge's portfolio of web development projects including e-commerce platforms, web applications, dashboards, and UI/UX design work. View live demos and case studies." />
+        <meta name="keywords" content="web development portfolio, react projects, e-commerce websites, web applications, Prompt Forge projects" />
         <link rel="canonical" href="https://mspndev.com/portfolio" />
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}

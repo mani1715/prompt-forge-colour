@@ -20,7 +20,7 @@ class Settings(BaseModel):
     class Config:
         json_schema_extra = {
             "example": {
-                "agency_name": "MSPN DEV",
+                "agency_name": "Prompt Forge",
                 "owner_name": "Maneesh",
                 "email": "info@mspndev.com",
                 "phone": "+1234567890",

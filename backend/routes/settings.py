@@ -14,7 +14,7 @@ async def get_settings():
     if not settings:
         # Return default settings if none exist
         default_settings = Settings(
-            agency_name="MSPN DEV",
+            agency_name="Prompt Forge",
             owner_name="Maneesh",
             email="info@mspndev.com",
             phone="+1234567890",
@@ -43,7 +43,7 @@ async def update_settings(settings_data: SettingsUpdate):
     else:
         # Create new settings
         settings = Settings(
-            agency_name=settings_data.agency_name or "MSPN DEV",
+            agency_name=settings_data.agency_name or "Prompt Forge",
             owner_name=settings_data.owner_name or "Admin",
             email=settings_data.email or "info@mspndev.com",
             phone=settings_data.phone or "+1234567890",

@@ -1,4 +1,4 @@
-# MSPN DEV API Documentation
+# Prompt Forge API Documentation
 
 ## Base URL
 ```
@@ -273,7 +273,7 @@ GET /api/settings/
 Response:
 {
   "id": "global_settings",
-  "agency_name": "MSPN DEV",
+  "agency_name": "Prompt Forge",
   "owner_name": "Maneesh",
   "email": "info@mspndev.com",
   "phone": "+1234567890",

@@ -9,7 +9,7 @@ class BlogCreate(BaseModel):
     cover_image: str
     category: str
     tags: List[str] = []
-    author: str = "MSPN DEV"
+    author: str = "Prompt Forge"
     status: str = "draft"
     seo_title: Optional[str] = None
     seo_description: Optional[str] = None

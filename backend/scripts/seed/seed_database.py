@@ -183,7 +183,7 @@ async def seed_settings():
     await settings_collection.delete_many({})
     
     settings = Settings(
-        agency_name="MSPN DEV",
+        agency_name="Prompt Forge",
         owner_name="Maneesh",
         email="info@mspndev.com",
         phone="+1234567890",

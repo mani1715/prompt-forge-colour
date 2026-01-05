@@ -1,4 +1,4 @@
-# 🚀 Complete Render Deployment Guide for MSPN DEV Backend
+# 🚀 Complete Render Deployment Guide for Prompt Forge Backend
 
 ## ✅ Pre-Deployment Checklist
 
@@ -165,7 +165,7 @@ Expected response:
 ```json
 {
   "status": "healthy",
-  "service": "MSPN DEV API",
+  "service": "Prompt Forge API",
   "message": "Backend is running successfully"
 }
 ```
@@ -178,7 +178,7 @@ curl https://your-backend-url.onrender.com/api/
 Expected response:
 ```json
 {
-  "message": "MSPN DEV API is running",
+  "message": "Prompt Forge API is running",
   "status": "healthy"
 }
 ```

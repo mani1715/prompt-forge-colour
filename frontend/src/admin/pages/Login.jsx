@@ -77,11 +77,11 @@ const Login = () => {
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
           <img
             src="/mspn-logo-transparent.png"
-            alt="MSPN DEV Logo"
+            alt="Prompt Forge Logo"
             style={{ height: '80px', marginBottom: '16px' }}
           />
           <h1 style={{ fontSize: '28px', fontWeight: '700' }}>
-            MSPN DEV Admin
+            Prompt Forge Admin
           </h1>
           <p style={{ color: '#6B7280' }}>
             Sign in to manage your website

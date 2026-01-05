@@ -6,7 +6,7 @@ export const adminData = {
       hero: {
         badge: '',
         headline: 'Build Your Dream Website',
-        subheadline: 'MSPN DEV Web Development Solutions',
+        subheadline: 'Prompt Forge Web Development Solutions',
         description: 'Transform your vision into stunning reality with our premium web development services. We craft bespoke digital experiences that captivate, engage, and convert.',
         cta1Text: 'Start Your Project',
         cta1Link: '/contact',
@@ -41,7 +41,7 @@ export const adminData = {
     },
     about: {
       hero: {
-        headline: 'About MSPN DEV',
+        headline: 'About Prompt Forge',
         subheadline: 'Your Trusted Web Development Partner',
         description: 'We are a team of passionate developers and designers dedicated to creating exceptional digital experiences.',
         visible: true
@@ -248,7 +248,7 @@ export const adminData = {
 
   settings: {
     agency: {
-      name: 'MSPN DEV',
+      name: 'Prompt Forge',
       owner: 'Maneesh',
       email: 'contact@mspndev.com',
       phone: '+1 (555) 123-4567',
