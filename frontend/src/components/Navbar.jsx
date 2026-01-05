@@ -31,13 +31,13 @@ const Navbar = () => {
           textDecoration: 'none'
         }}>
           <img 
-            src="/promptforge-logo-transparent.png" 
+            src="/prompt-forge-logo.png" 
             alt="Prompt Forge Logo" 
             style={{
               height: '50px',
               width: 'auto',
               objectFit: 'contain',
-              filter: 'drop-shadow(0 2px 8px rgba(139, 92, 246, 0.3))'
+              filter: 'drop-shadow(0 2px 8px rgba(0, 200, 255, 0.5))'
             }}
           />
           <span className="logo-text" style={{
