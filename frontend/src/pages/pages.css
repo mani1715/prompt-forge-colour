@@ -739,21 +739,22 @@
 
 .floating-card {
   position: absolute;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 16, 27, 0.85);
   backdrop-filter: blur(16px);
   border-radius: 20px;
   padding: 2rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  box-shadow: 0 12px 40px rgba(124, 92, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 20px rgba(0, 56, 255, 0.3);
+  border: 1px solid rgba(0, 191, 255, 0.4);
   transition: all 0.3s ease;
 }
 
 .floating-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(124, 92, 255, 0.25);
+  box-shadow: 0 0 40px rgba(0, 191, 255, 0.6), 0 16px 48px rgba(0, 56, 255, 0.4);
+  border-color: rgba(0, 191, 255, 0.8);
 }
 
 .floating-card.card-1 {
