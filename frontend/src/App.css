@@ -849,15 +849,17 @@ a {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* Footer */
+/* Footer with Blue Neon Theme */
 .footer {
-  background: linear-gradient(135deg, #1a1f35 0%, #2d1b4e 50%, #1a1f35 100%);
+  background: linear-gradient(135deg, #04101b 0%, #001540 50%, #04101b 100%);
   position: relative;
   color: white;
   padding: 3rem 2rem 1.5rem;
   margin-top: 4rem;
   z-index: 10;
   overflow: hidden;
+  border-top: 2px solid var(--color-cyan-neon);
+  box-shadow: 0 -5px 30px rgba(0, 191, 255, 0.3);
 }
 
 .footer::before {
@@ -867,9 +869,15 @@ a {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #8B5CF6 0%, #EC4899 25%, #3B82F6 50%, #10B981 75%, #8B5CF6 100%);
+  background: linear-gradient(90deg, 
+    #00bfff 0%, 
+    #0038ff 25%, 
+    #00b5f8 50%, 
+    #0038ff 75%, 
+    #00bfff 100%);
   background-size: 200% 100%;
   animation: gradientShift 8s ease infinite;
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
 }
 
 @keyframes gradientShift {
