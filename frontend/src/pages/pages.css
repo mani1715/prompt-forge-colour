@@ -781,11 +781,12 @@
 .float-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #7C5CFF 0%, #BFA7FF 100%);
+  background: linear-gradient(135deg, #0038ff 0%, #00bfff 100%);
   color: white;
   border-radius: 12px;
   padding: 0.75rem;
   flex-shrink: 0;
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
 }
 
 .float-text {
@@ -795,20 +796,23 @@
 .float-title {
   font-size: 1.125rem;
   font-weight: 700;
-  color: #1C2A3A;
+  color: #00bfff;
   margin-bottom: 0.25rem;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
 }
 
 .float-subtitle {
   font-size: 0.875rem;
-  color: #64748b;
+  color: #00b5f8;
+  text-shadow: 0 0 5px rgba(0, 181, 248, 0.3);
 }
 
 .hero-decoration-circle {
   position: absolute;
   border-radius: 50%;
-  border: 2px solid rgba(124, 92, 255, 0.2);
+  border: 2px solid rgba(0, 191, 255, 0.3);
   pointer-events: none;
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
 }
 
 .hero-decoration-circle.circle-1 {
