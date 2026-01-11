@@ -496,12 +496,17 @@ a {
   animation-delay: 4s;
 }
 
-/* Stats Section with Glassmorphism */
+/* Stats Section with Blue Neon Glassmorphism */
 .stats-section {
-  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary-lighter) 100%);
+  background: linear-gradient(135deg, rgba(0, 56, 255, 0.3) 0%, rgba(0, 191, 255, 0.2) 100%);
   padding: 3rem 2rem;
   margin: 2rem 0;
   position: relative;
+  border-top: 2px solid var(--color-cyan-neon);
+  border-bottom: 2px solid var(--color-cyan-neon);
+  box-shadow: 
+    0 0 30px rgba(0, 191, 255, 0.3),
+    inset 0 0 50px rgba(0, 56, 255, 0.2);
 }
 
 .stats-grid {
