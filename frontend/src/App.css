@@ -932,10 +932,11 @@ a {
 }
 
 .footer-tagline {
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--color-cyan-blue);
   margin-bottom: 1.5rem;
   font-weight: 400;
   letter-spacing: 0.3px;
+  text-shadow: 0 0 8px rgba(0, 181, 248, 0.5);
 }
 
 .footer-social {
