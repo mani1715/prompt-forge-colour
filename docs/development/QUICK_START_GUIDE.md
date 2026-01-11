@@ -2,10 +2,10 @@
 
 ## 🚀 Access Your Application
 
-**Live URL:** https://forge-prompt.preview.emergentagent.com
+**Live URL:** https://project-hub-231.preview.emergentagent.com
 
 ### Admin Panel Login
-**URL:** https://forge-prompt.preview.emergentagent.com/admin/login
+**URL:** https://project-hub-231.preview.emergentagent.com/admin/login
 
 ```
 Username: admin
@@ -315,9 +315,9 @@ Your portfolio management system is now fully operational with:
 ---
 
 **Quick Links:**
-- Admin Login: https://forge-prompt.preview.emergentagent.com/admin/login
-- Client Login: https://forge-prompt.preview.emergentagent.com/client/login
-- Main Site: https://forge-prompt.preview.emergentagent.com
+- Admin Login: https://project-hub-231.preview.emergentagent.com/admin/login
+- Client Login: https://project-hub-231.preview.emergentagent.com/client/login
+- Main Site: https://project-hub-231.preview.emergentagent.com
 
 **Documentation:**
 - Full fix details: `/app/MIXED_CONTENT_FIX_COMPLETE.md`

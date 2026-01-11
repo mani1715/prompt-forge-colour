@@ -2,10 +2,10 @@
 
 ## Access the Application
 
-**Preview URL**: https://forge-prompt.preview.emergentagent.com
+**Preview URL**: https://project-hub-231.preview.emergentagent.com
 
 ## Admin Login Credentials
-- **URL**: https://forge-prompt.preview.emergentagent.com/admin/login
+- **URL**: https://project-hub-231.preview.emergentagent.com/admin/login
 - **Username**: `admin`
 - **Password**: `admin123`
 - ⚠️ **Important**: Change this password after first login!

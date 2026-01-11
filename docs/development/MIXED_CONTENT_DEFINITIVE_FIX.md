@@ -3,13 +3,13 @@
 ## ❌ THE PROBLEM
 
 You were experiencing a **Mixed Content Error** where:
-- Page loaded over **HTTPS**: `https://forge-prompt.preview.emergentagent.com/client/dashboard`
+- Page loaded over **HTTPS**: `https://project-hub-231.preview.emergentagent.com/client/dashboard`
 - But axios requests were downgraded to **HTTP**: `http://network-debug-3.preview.emergentagent.com/api/client/projects/`
 - Browser **BLOCKED** the HTTP request for security reasons
 
 ### Error Message:
 ```
-Mixed Content: The page at 'https://forge-prompt.preview.emergentagent.com/client/dashboard' 
+Mixed Content: The page at 'https://project-hub-231.preview.emergentagent.com/client/dashboard' 
 was loaded over HTTPS, but requested an insecure resource 
 'http://network-debug-3.preview.emergentagent.com/api/client/projects/'. 
 This request has been blocked; the content must be served over HTTPS.
