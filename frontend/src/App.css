@@ -417,7 +417,7 @@ a {
 }
 
 .cta-primary-glass {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  background: linear-gradient(135deg, var(--color-blue-bright) 0%, var(--color-cyan-neon) 100%);
   color: white;
   padding: 0.875rem 2rem;
   border-radius: var(--radius-full);
@@ -428,29 +428,31 @@ a {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border: none;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(191, 167, 255, 0.4);
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.6), 0 8px 24px rgba(0, 56, 255, 0.4);
 }
 
 .cta-primary-glass:hover {
   transform: translateY(-3px);
-  box-shadow: 0 16px 40px rgba(191, 167, 255, 0.5);
+  box-shadow: 0 0 40px rgba(0, 191, 255, 0.9), 0 16px 40px rgba(0, 56, 255, 0.6);
 }
 
 .cta-secondary-glass {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 16, 27, 0.7);
   backdrop-filter: blur(12px);
-  color: var(--color-accent);
+  color: var(--color-cyan-neon);
   padding: 0.875rem 2rem;
-  border: 2px solid var(--color-primary);
+  border: 2px solid var(--color-cyan-neon);
   border-radius: var(--radius-full);
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.2s ease;
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.3);
 }
 
 .cta-secondary-glass:hover {
-  background: var(--color-primary-lightest);
+  background: rgba(0, 56, 255, 0.2);
   transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
 }
 
 .hero-visual {
