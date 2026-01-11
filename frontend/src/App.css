@@ -583,14 +583,18 @@ a {
 .section-title {
   font-size: clamp(2rem, 5vw, 2.5rem);
   margin-bottom: 1rem;
-  color: var(--color-dark);
+  color: var(--color-cyan-neon);
+  text-shadow: 
+    0 0 15px rgba(0, 191, 255, 0.9),
+    0 0 30px rgba(0, 191, 255, 0.6);
 }
 
 .section-description {
   font-size: 1.125rem;
-  color: var(--color-text-light);
+  color: var(--color-cyan-blue);
   max-width: 600px;
   margin: 0 auto;
+  text-shadow: 0 0 8px rgba(0, 181, 248, 0.5);
 }
 
 /* Services Grid */
