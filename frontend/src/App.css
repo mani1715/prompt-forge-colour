@@ -606,18 +606,19 @@ a {
 
 .service-card-glass {
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 16, 27, 0.8);
   backdrop-filter: blur(16px);
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 191, 255, 0.4);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(191, 167, 255, 0.15);
+  box-shadow: 0 0 20px rgba(0, 56, 255, 0.3);
 }
 
 .service-card-glass:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(191, 167, 255, 0.3);
+  box-shadow: 0 0 40px rgba(0, 191, 255, 0.6), 0 12px 32px rgba(0, 56, 255, 0.4);
+  border-color: rgba(0, 191, 255, 0.8);
 }
 
 .service-icon-glass {
