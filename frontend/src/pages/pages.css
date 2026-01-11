@@ -833,10 +833,15 @@
 
 /* ========== STATS BAR - PREMIUM ========== */
 .stats-bar-premium {
-  background: linear-gradient(135deg, #7C5CFF 0%, #BFA7FF 100%);
+  background: linear-gradient(135deg, rgba(0, 56, 255, 0.3) 0%, rgba(0, 191, 255, 0.2) 100%);
   padding: 3rem 2rem;
   position: relative;
   overflow: hidden;
+  border-top: 2px solid #00bfff;
+  border-bottom: 2px solid #00bfff;
+  box-shadow: 
+    0 0 30px rgba(0, 191, 255, 0.3),
+    inset 0 0 50px rgba(0, 56, 255, 0.2);
 }
 
 .stats-bar-premium::before {
