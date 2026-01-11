@@ -637,13 +637,15 @@ a {
   font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
-  color: var(--color-dark);
+  color: var(--color-cyan-neon);
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
 }
 
 .service-description {
   font-size: 0.9375rem;
-  color: var(--color-text-light);
+  color: var(--color-cyan-blue);
   line-height: 1.6;
+  text-shadow: 0 0 5px rgba(0, 181, 248, 0.3);
 }
 
 /* Projects Grid */
