@@ -686,7 +686,7 @@
 }
 
 .cta-gold-gradient {
-  background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+  background: linear-gradient(135deg, #0038ff 0%, #00bfff 100%);
   color: white;
   padding: 1rem 2rem;
   border-radius: 50px;
@@ -695,31 +695,33 @@
   display: inline-flex;
   align-items: center;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.6), 0 8px 24px rgba(0, 56, 255, 0.4);
   border: none;
 }
 
 .cta-gold-gradient:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 40px rgba(0, 191, 255, 0.9), 0 16px 40px rgba(0, 56, 255, 0.6);
 }
 
 .cta-purple-outline {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  color: #7C5CFF;
+  background: rgba(0, 16, 27, 0.7);
+  backdrop-filter: blur(12px);
+  color: #00bfff;
   padding: 1rem 2rem;
-  border: 2px solid #7C5CFF;
+  border: 2px solid #00bfff;
   border-radius: 50px;
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.3);
 }
 
 .cta-purple-outline:hover {
-  background: #7C5CFF;
-  color: white;
+  background: rgba(0, 56, 255, 0.2);
+  color: #00bfff;
   transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
 }
 
 /* Hero Right - Floating 3D Cards */
