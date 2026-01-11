@@ -382,12 +382,13 @@ a {
 .hero-title {
   font-size: clamp(3rem, 8vw, 4.5rem);
   font-weight: 800;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  background: linear-gradient(135deg, var(--color-cyan-neon) 0%, var(--color-cyan-blue) 50%, var(--color-blue-bright) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 1rem;
-  animation: fadeInUp 0.6s ease-out 0.1s both;
+  animation: fadeInUp 0.6s ease-out 0.1s both, neonPulse 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.8));
 }
 
 .hero-subtitle {
