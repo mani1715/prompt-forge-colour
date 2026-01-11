@@ -1317,20 +1317,24 @@ a {
     display: flex;
     flex-direction: column;
     padding: 1rem 2rem 2rem;
-    background: white;
-    border-top: 1px solid var(--color-border);
+    background: rgba(4, 16, 27, 0.98);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--color-cyan-neon);
+    box-shadow: 0 4px 20px rgba(0, 191, 255, 0.3);
   }
   
   .mobile-nav-link {
     padding: 0.875rem 0;
     font-size: 1rem;
     font-weight: 500;
-    color: var(--color-text);
-    border-bottom: 1px solid var(--color-border);
+    color: var(--color-cyan-blue);
+    border-bottom: 1px solid rgba(0, 191, 255, 0.2);
+    text-shadow: 0 0 5px rgba(0, 181, 248, 0.3);
   }
   
   .mobile-nav-link.active {
-    color: var(--color-primary);
+    color: var(--color-cyan-neon);
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.9);
   }
   
   .mobile-cta-button {
