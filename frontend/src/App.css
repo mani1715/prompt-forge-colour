@@ -149,34 +149,37 @@ a[href*="emergent.sh"] {
   padding-top: 80px;
 }
 
-/* Typography with Neon Glow */
+/* Typography with Enhanced Neon Glow - 100% Intensity */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 700;
   line-height: 1.2;
   color: var(--color-cyan-neon);
   text-shadow: 
-    0 0 10px rgba(0, 191, 255, 0.8),
-    0 0 20px rgba(0, 191, 255, 0.6),
-    0 0 30px rgba(0, 191, 255, 0.4),
-    0 0 40px rgba(0, 191, 255, 0.2);
+    0 0 10px rgba(0, 191, 255, 1),
+    0 0 20px rgba(0, 191, 255, 0.8),
+    0 0 30px rgba(0, 191, 255, 0.6),
+    0 0 40px rgba(0, 191, 255, 0.4),
+    0 0 50px rgba(0, 191, 255, 0.2);
   animation: neonPulse 2s ease-in-out infinite;
 }
 
 @keyframes neonPulse {
   0%, 100% { 
     text-shadow: 
-      0 0 10px rgba(0, 191, 255, 0.8),
-      0 0 20px rgba(0, 191, 255, 0.6),
-      0 0 30px rgba(0, 191, 255, 0.4),
-      0 0 40px rgba(0, 191, 255, 0.2);
+      0 0 10px rgba(0, 191, 255, 1),
+      0 0 20px rgba(0, 191, 255, 0.8),
+      0 0 30px rgba(0, 191, 255, 0.6),
+      0 0 40px rgba(0, 191, 255, 0.4),
+      0 0 50px rgba(0, 191, 255, 0.2);
   }
   50% { 
     text-shadow: 
       0 0 15px rgba(0, 191, 255, 1),
-      0 0 30px rgba(0, 191, 255, 0.8),
-      0 0 45px rgba(0, 191, 255, 0.6),
-      0 0 60px rgba(0, 191, 255, 0.4);
+      0 0 30px rgba(0, 191, 255, 1),
+      0 0 45px rgba(0, 191, 255, 0.8),
+      0 0 60px rgba(0, 191, 255, 0.6),
+      0 0 75px rgba(0, 191, 255, 0.4);
   }
 }
 
