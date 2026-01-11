@@ -2,10 +2,10 @@
 
 ## Access the Application
 
-**Preview URL**: https://project-hub-231.preview.emergentagent.com
+**Preview URL**: https://color-fusion-web.preview.emergentagent.com
 
 ## Admin Login Credentials
-- **URL**: https://project-hub-231.preview.emergentagent.com/admin/login
+- **URL**: https://color-fusion-web.preview.emergentagent.com/admin/login
 - **Username**: `admin`
 - **Password**: `admin123`
 - ⚠️ **Important**: Change this password after first login!

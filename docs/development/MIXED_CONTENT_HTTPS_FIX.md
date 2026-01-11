@@ -2,13 +2,13 @@
 
 ## Problem Description
 The client dashboard was experiencing Mixed Content Security Errors where:
-- **Page URL**: `https://project-hub-231.preview.emergentagent.com/client/dashboard` (HTTPS)
+- **Page URL**: `https://color-fusion-web.preview.emergentagent.com/client/dashboard` (HTTPS)
 - **API Calls**: `http://code-medic-35.preview.emergentagent.com/api/client/projects/` (HTTP ❌)
 - **Browser Behavior**: Blocked insecure HTTP requests from HTTPS pages
 
 ### Error Message
 ```
-Mixed Content: The page at 'https://project-hub-231.preview.emergentagent.com/client/dashboard' 
+Mixed Content: The page at 'https://color-fusion-web.preview.emergentagent.com/client/dashboard' 
 was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint 
 'http://code-medic-35.preview.emergentagent.com/api/client/projects/'. 
 This request has been blocked; the content must be served over HTTPS.
@@ -111,8 +111,8 @@ api.interceptors.request.use(
 - ✅ No mixed content issues
 
 ### Production (HTTPS)
-- Page loads at: `https://project-hub-231.preview.emergentagent.com`
-- API calls go to: `https://project-hub-231.preview.emergentagent.com/api`
+- Page loads at: `https://color-fusion-web.preview.emergentagent.com`
+- API calls go to: `https://color-fusion-web.preview.emergentagent.com/api`
 - ✅ All secure, no mixed content issues
 
 ## Testing Instructions
