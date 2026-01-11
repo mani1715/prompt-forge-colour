@@ -243,14 +243,16 @@ a {
 .nav-link {
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--color-text);
+  color: var(--color-cyan-blue);
   position: relative;
-  transition: color 0.2s ease;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(0, 181, 248, 0.5);
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--color-primary);
+  color: var(--color-cyan-neon);
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.9);
 }
 
 .nav-link.active::after {
@@ -260,7 +262,8 @@ a {
   left: 0;
   right: 0;
   height: 2px;
-  background: var(--color-primary);
+  background: var(--color-cyan-neon);
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.9);
 }
 
 .navbar-cta {
