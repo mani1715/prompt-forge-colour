@@ -18,30 +18,29 @@
    Premium Purple Theme with Modern Design
    ============================================ */
 
-/* Root Variables - Prompt Forge Premium Theme */
+/* Root Variables - Prompt Forge Blue Neon Theme */
 :root {
-  /* Brand Colors - Gold & Purple Premium Palette */
-  --color-gold: #D4AF37;
-  --color-navy: #1C2A3A;
-  --color-lavender: #EDE7FF;
-  --color-purple-medium: #BFA7FF;
-  --color-purple-deep: #7C5CFF;
+  /* Brand Colors - Blue Neon Palette */
+  --color-dark-bg: #04101b;
+  --color-blue-bright: #0038ff;
+  --color-cyan-neon: #00bfff;
+  --color-cyan-blue: #00b5f8;
   
   /* Extended Palette */
-  --color-primary: #7C5CFF;
-  --color-primary-light: #BFA7FF;
-  --color-primary-lighter: #E7D9FF;
-  --color-primary-lightest: #F3EEFF;
-  --color-secondary: #EDE7FF;
-  --color-accent: #D4AF37;
+  --color-primary: #0038ff;
+  --color-primary-light: #00b5f8;
+  --color-primary-lighter: #00bfff;
+  --color-primary-lightest: #00d4ff;
+  --color-secondary: #00bfff;
+  --color-accent: #00bfff;
   
   /* Neutral Colors */
-  --color-dark: #1C2A3A;
-  --color-text: #334155;
-  --color-text-light: #64748b;
+  --color-dark: #04101b;
+  --color-text: #00b5f8;
+  --color-text-light: #00bfff;
   --color-white: #ffffff;
-  --color-background: #fafafa;
-  --color-border: #e2e8f0;
+  --color-background: #04101b;
+  --color-border: #0038ff;
   
   /* Spacing */
   --spacing-xs: 0.5rem;
