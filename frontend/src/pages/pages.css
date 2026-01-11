@@ -557,9 +557,16 @@
 .hero-section-premium {
   position: relative;
   min-height: 90vh;
-  background: linear-gradient(135deg, #EDE7FF 0%, #F3EEFF 50%, #ffffff 100%);
+  background: linear-gradient(135deg, #04101b 0%, #001a40 25%, #0038ff 50%, #001a40 75%, #04101b 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
   overflow: hidden;
   padding: 2rem 0;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .hero-background-sparkles {
