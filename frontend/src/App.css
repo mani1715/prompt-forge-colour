@@ -665,19 +665,20 @@ a {
 
 .project-card-glass,
 .portfolio-card {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 16, 27, 0.85);
   backdrop-filter: blur(16px);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 191, 255, 0.4);
   transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(191, 167, 255, 0.15);
+  box-shadow: 0 0 20px rgba(0, 56, 255, 0.3);
 }
 
 .project-card-glass:hover,
 .portfolio-card:hover {
-  box-shadow: 0 16px 48px rgba(191, 167, 255, 0.3);
+  box-shadow: 0 0 40px rgba(0, 191, 255, 0.6), 0 16px 48px rgba(0, 56, 255, 0.4);
   transform: translateY(-4px);
+  border-color: rgba(0, 191, 255, 0.8);
 }
 
 .project-image,
