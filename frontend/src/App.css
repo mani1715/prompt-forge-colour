@@ -731,15 +731,17 @@ a {
   font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: var(--color-dark);
+  color: var(--color-cyan-neon);
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
 }
 
 .project-description,
 .portfolio-description {
   font-size: 0.9375rem;
-  color: var(--color-text-light);
+  color: var(--color-cyan-blue);
   margin-bottom: 1rem;
   line-height: 1.5;
+  text-shadow: 0 0 5px rgba(0, 181, 248, 0.3);
 }
 
 .project-technologies,
