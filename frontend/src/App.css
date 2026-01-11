@@ -778,9 +778,18 @@ a {
 
 .testimonial-card {
   padding: 2rem;
-  background: white;
+  background: rgba(0, 16, 27, 0.85);
+  backdrop-filter: blur(16px);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(0, 191, 255, 0.4);
+  box-shadow: 0 0 20px rgba(0, 56, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 0 40px rgba(0, 191, 255, 0.6), 0 16px 48px rgba(0, 56, 255, 0.4);
+  transform: translateY(-4px);
+  border-color: rgba(0, 191, 255, 0.8);
 }
 
 .testimonial-rating {
@@ -792,10 +801,11 @@ a {
 
 .testimonial-content {
   font-size: 0.9375rem;
-  color: var(--color-text);
+  color: var(--color-cyan-blue);
   line-height: 1.6;
   margin-bottom: 1.5rem;
   font-style: italic;
+  text-shadow: 0 0 5px rgba(0, 181, 248, 0.3);
 }
 
 .testimonial-author {
@@ -806,12 +816,14 @@ a {
 
 .author-name {
   font-weight: 700;
-  color: var(--color-dark);
+  color: var(--color-cyan-neon);
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
 }
 
 .author-role {
   font-size: 0.875rem;
-  color: var(--color-text-light);
+  color: var(--color-cyan-blue);
+  text-shadow: 0 0 5px rgba(0, 181, 248, 0.3);
 }
 
 /* CTA Section */
