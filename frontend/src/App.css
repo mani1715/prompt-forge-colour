@@ -1010,10 +1010,11 @@ a {
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #fff 0%, rgba(139, 92, 246, 0.8) 100%);
+  background: linear-gradient(135deg, #00bfff 0%, rgba(0, 191, 255, 0.8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.6));
 }
 
 .footer-links-list {
@@ -1024,12 +1025,13 @@ a {
 }
 
 .footer-link {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-cyan-blue);
   font-size: 0.9375rem;
   transition: all 0.3s ease;
   cursor: pointer;
   position: relative;
   width: fit-content;
+  text-shadow: 0 0 5px rgba(0, 181, 248, 0.3);
 }
 
 .footer-link::after {
@@ -1039,12 +1041,14 @@ a {
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #8B5CF6 0%, #3B82F6 100%);
+  background: linear-gradient(90deg, #00bfff 0%, #0038ff 100%);
   transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
 }
 
 .footer-link:hover {
-  color: white;
+  color: var(--color-cyan-neon);
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
 }
 
 .footer-link:hover::after {
