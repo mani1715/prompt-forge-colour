@@ -922,12 +922,13 @@ a {
   font-size: 1.5rem;
   font-weight: 800;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 50%, #3B82F6 100%);
+  background: linear-gradient(135deg, #00bfff 0%, #00b5f8 50%, #0038ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   background-size: 200% 100%;
   animation: gradientShift 6s ease infinite;
+  filter: drop-shadow(0 0 15px rgba(0, 191, 255, 0.8));
 }
 
 .footer-tagline {
